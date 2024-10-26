@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -48,3 +49,7 @@ export default tseslint.config({
   },
 })
 ```
+=======
+# e-flight
+This is an Airline reservation system web applications  which allows users to book flights, manage reservations, and check flight details. It is built with React, typescript, tailwindCss 
+>>>>>>> ee49d918e60a9f500c714644c8f345eeddf1be29
