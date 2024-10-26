@@ -8,7 +8,14 @@ export default {
         '3xl': '0px 2px 5px #171a1f, 0px 0px 2px #171a1f',
       },
       colors:{
-        "secondary-500":"#15ABFFFF"
+        "secondary-500":"#15ABFFFF",
+        "neutral-150":"#F8F9FAFF",
+        "primary-500":"#6D31EDFF",
+        "primary-600":"#5113D7FF",
+        "primary-700":"#3F0EA6FF",
+        " neutral-900":"#171A1FFF",
+        "neutral-400":"#BDC1CAFF",
+        "neutral-500":"#9095A1FF"
       }
     },
   },
