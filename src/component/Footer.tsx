@@ -2,8 +2,8 @@ import logo from "../assets/logo.png"
 
 const Footer = () => {
   return (
-    <div className="bg-neutral-150 px-[10%] py-3 overflow-x-hidden mt-5">
-    <div className="flex justify-between items-start text-left mb-5 ">
+    <div className="bg-neutral-150 px-[10%] py-3 mt-5 fixed bottom-0 left-0 w-full md:static">
+    <div className="flex flex-col md:flex-row justify-between items-start text-left mb-5 ">
         <div>
         <div className="flex justify-start items-center space-x-2 mb-5">
             <img src={logo} alt="" srcSet="" className="w-7" />
@@ -15,6 +15,7 @@ const Footer = () => {
             <button className="bg-primary-500 text-sm font-normal text-white hover:bg-primary-600 active:bg-primary-700 rounded-2xl px-2 py-1">Subscribe</button>
             </div>
             </div>
+            <div className="flex justify-between items-center my-5 w-full md:hidden">
             <div>
                 <p className="text-xl font-bold text- neutral-900">About us</p>
                 <p className="font-normal text-sm text- neutral-900 py-2">How to book</p>
@@ -25,7 +26,18 @@ const Footer = () => {
                 <p className="font-normal text-sm text- neutral-900 py-2">Booking easily</p>
                 <p  className="font-normal text-sm text- neutral-900">Promotions</p>
             </div>
-            <div>
+            </div>
+            <div className="hidden md:block">
+                <p className="text-xl font-bold text- neutral-900">About us</p>
+                <p className="font-normal text-sm text- neutral-900 py-2">How to book</p>
+                <p className="font-normal text-sm text- neutral-900">Help center</p>
+            </div>
+            <div className="hidden md:block">
+                <p className="text-xl font-bold text- neutral-900">Flight</p>
+                <p className="font-normal text-sm text- neutral-900 py-2">Booking easily</p>
+                <p  className="font-normal text-sm text- neutral-900">Promotions</p>
+            </div>
+            <div >
                 <p className="text-xl font-bold text- neutral-900">Contact us</p>
                
             </div>
