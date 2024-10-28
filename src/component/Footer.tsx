@@ -2,7 +2,7 @@ import logo from "../assets/logo.png"
 
 const Footer = () => {
   return (
-    <div className="bg-neutral-150 px-[10%] py-3 mt-5 fixed bottom-0 left-0 w-full md:static">
+    <div className="bg-neutral-150 px-[10%] py-3 mt-5 fixed bottom-0 left-0 w-screen md:static">
     <div className="flex flex-col md:flex-row justify-between items-start text-left mb-5 ">
         <div>
         <div className="flex justify-start items-center space-x-2 mb-5">
@@ -37,7 +37,7 @@ const Footer = () => {
                 <p className="font-normal text-sm text- neutral-900 py-2">Booking easily</p>
                 <p  className="font-normal text-sm text- neutral-900">Promotions</p>
             </div>
-            <div >
+            <div>
                 <p className="text-xl font-bold text- neutral-900">Contact us</p>
                
             </div>
