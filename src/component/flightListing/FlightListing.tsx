@@ -4,9 +4,9 @@ import { FlightSort } from "./flightSort"
 
 export default function FlightListing() {
   return (
-    <div className="flex justify-between items-center w-screen mt-3">
+    <div className="flex justify-between items-start w-full mt-3 space-x-5">
      <FlightSort/>   
-     <div>
+     <div className="w-3/4 text-left">
         <FlightFilter/>
         <FlightCard/>
      </div>

@@ -2,7 +2,7 @@ import sort from "../../assets/sort.png"
 import filter from "../../assets/filter.png"
 export const FlightSort = () => {
   return (
-    <div className="w-1/5 text-left">
+    <div className="w-1/4 text-left">
  
         <div className="flex justify-start items-center w-full space-x-1 pb-1">
             <img src={sort} alt="" srcSet="" className="w-5" />

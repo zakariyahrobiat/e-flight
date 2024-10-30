@@ -2,9 +2,9 @@ import logo from "../assets/logo.png"
 
 const Footer = () => {
   return (
-    <div className="bg-neutral-150 px-[10%] py-3 mt-5 fixed bottom-0 left-0 w-screen md:static">
-    <div className="flex flex-col md:flex-row justify-between items-start text-left mb-5 ">
-        <div>
+    <div className="bg-neutral-150 px-6 py-3 mt-5 w-full">
+   <div className="flex flex-col md:flex-row justify-between items-start text-left mb-5 ">
+           <div>
         <div className="flex justify-start items-center space-x-2 mb-5">
             <img src={logo} alt="" srcSet="" className="w-7" />
             <p className="font-semibold text-xl text-secondary-500">E-flight</p>
@@ -42,7 +42,7 @@ const Footer = () => {
                
             </div>
     </div>
-    <p className="text-neutral-500 font-normal text-sm">© design inspiration visily.ai</p>
+    <p className="text-neutral-500 font-normal text-sm">© design inspiration visily.ai</p>  
     </div>
   )
 }
