@@ -1,6 +1,6 @@
 import sort from "../../assets/sort.png"
 import filter from "../../assets/filter.png"
- const FlightSort = () => {
+const FlightSort = () => {
   return (
     <div className="w-1/4 text-left">
  
@@ -64,4 +64,6 @@ import filter from "../../assets/filter.png"
 </div>
   )
 }
+
+
 export default FlightSort
