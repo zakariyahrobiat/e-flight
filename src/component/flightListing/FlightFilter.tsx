@@ -19,12 +19,12 @@ const FlightFilter = () => {
             <option value="">First class</option>
         </select>
     </div>
-    <div className='flex items-center w-full space-x-5 justify-between'>
+    <div className='flex items-center space-x-2 w-full md:space-x-5 justify-between relative'>
         <input type="text" name="" id="" className="border-2 border-neutral-400 rounded-2xl p-1 text-sm font-normal w-1/3" placeholder='Houston (HOU)                         ' />
         <input type="text" name="" id="" className="border-2 border-neutral-400 rounded-2xl p-1 text-sm font-normal w-1/3" placeholder='Los Angeles (LAX)                  ' />
       
    
-    <div className="flex flex-col space-y-4 relative w-1/3">
+    <div className="flex flex-col space-y-4 w-1/3 md:relative">
       <div className="flex items-center space-x-2 border-2 border-neutral-400 rounded-2xl p-1 text-sm font-normal">
        
         <FaCalendarAlt 
@@ -34,12 +34,12 @@ const FlightFilter = () => {
 
       
         <span className="text-gray-700">
-          {startDate && endDate ? `${startDate} - ${endDate}` : 'Select date range'}
+          {startDate && endDate ? `${startDate} - ${endDate}` : 'Select date'}
         </span>
       </div>
 
       {showInputs && (
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 absolute top-4 left-1/4 md:left-0">
           <div className="flex flex-col">
             <label htmlFor="start-date" className="text-sm">Start Date</label>
             <input
