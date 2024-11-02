@@ -1,89 +1,49 @@
-
+import { FaGreaterThan, FaLessThan } from "react-icons/fa"
 import { useAuth } from "../../hooks/useAuth"
-// const data =[
-// {
-//   id:1,
-//   name:"HorizonJet",
-//   time:"10:25PM - 7:06AM",
-//   hours:"10 hr 41 min",
-//   price:275.5,
-//   type:"1 stop"
-// },
-// {
-//   id:2,
-//   name:"Altitude Airways",
-//   time:"6:30AM - 7:55AM",
-//   hours:"3 hr 25 min",
-//   price:206,
-//   type:"1 stop"
-// },
-// {
-//   id:3,
-//   name:"Cloudy Airlines",
-//   time:"6:30AM - 7:55AM",
-//   hours:"3 hr 25 min",
-//   price:206,
-//   type:"1 stop"
-// }
-// ,
-// {
-//   id:4,
-//   name:"Altitude Airways",
-//   time:"6:30AM - 7:55AM",
-//   hours:"3 hr 25 min",
-//   price:206,
-//   type:"1 stop"
-// }
-// ,
-// {
-//   id:5,
-//   name:"Altitude Airways",
-//   time:"6:30AM - 7:55AM",
-//   hours:"3 hr 25 min",
-//   price:206,
-//   type:"1 stop"
-// }
-// ,
-// {
-//   id:6,
-//   name:"Altitude Airways",
-//   time:"6:30AM - 7:55AM",
-//   hours:"3 hr 25 min",
-//   price:206,
-//   type:"1 stop"
-// }
-// ,
-// {
-//   id:7,
-//   name:"Altitude Airways",
-//   time:"6:30AM - 7:55AM",
-//   hours:"3 hr 25 min",
-//   price:206,
-//   type:"1 stop"
-// }
-// ,
-// {
-//   id:8,
-//   name:"Altitude Airways",
-//   time:"6:30AM - 7:55AM",
-//   hours:"3 hr 25 min",
-//   price:206,
-//   type:"1 stop"
-// }
-// ]
+
 const FlightCard = () => {
- const {dates}= useAuth()
+ const {dates, flightDetail, currentItems,previous, next}= useAuth()
   return (
 <div className="mt-5">
   <div className="flex justify-between items-center bg-primary-600 px-2">
-  {dates.map((item)=>{
+  {dates.map((item, index)=>{
     return(
-      <div className="text-white p-2 active:bg-white active:text-primary-600 active:rounded-t-md text-sm font-medium mt-2"><button > {item.toDateString()}</button></div>
+      <div key={index} className="text-white p-2 active:bg-white active:text-primary-600 active:rounded-t-md text-sm font-medium mt-2"><button > {item.toDateString()}</button></div>
     )
    
 })}
   </div>
+<div>
+  {currentItems.map((item)=>{
+    const {id, name, time, hours, price, type, weight} = item
+    return(
+     <div className="">
+      <div key={id} className="flex py-2 w-full justify-between items-center">
+<div className="w-2/5">
+<p >{name}</p>
+<p>{weight}kg</p>
 </div>
+
+<div className="w-2/5"><p>{time}</p> <p>{hours}</p></div>
+<p className="w-1/5">{type}</p>
+<p className="w-1/5">{price}USD</p>
+<button className="w-1/5">choose</button>
+
+      </div>
+      <hr className="w-full"/>
+      </div>
+
+    )
+  })}
+
+</div>
+
+<div className="flex justify-end items-center space-x-3">
+<FaLessThan className ="bg-primary-500 p-1 text-xl text-white" onClick={previous}/>
+<FaGreaterThan className="bg-primary-500 p-1 text-xl text-white" onClick={next}/>
+</div>
+</div>
+
   )
 }
 
