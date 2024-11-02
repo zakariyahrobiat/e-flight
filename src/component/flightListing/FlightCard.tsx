@@ -2,7 +2,7 @@ import { FaGreaterThan, FaLessThan } from "react-icons/fa"
 import { useAuth } from "../../hooks/useAuth"
 
 const FlightCard = () => {
- const {dates, flightDetail, currentItems,previous, next}= useAuth()
+ const {dates, currentItems,previous, next}= useAuth()
   return (
 <div className="mt-5">
   <div className="flex justify-between items-center bg-primary-600 px-2">
