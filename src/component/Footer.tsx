@@ -2,7 +2,7 @@ import logo from "../assets/logo.png"
 
 const Footer = () => {
   return (
-    <div className="bg-neutral-150 px-6 py-3 mt-5 w-full">
+    <div className="bg-neutral-150 px-6 py-3 mt-5 w-screen">
    <div className="flex flex-col md:flex-row justify-between items-start text-left mb-5 ">
            <div>
         <div className="flex justify-start items-center space-x-2 mb-5">
