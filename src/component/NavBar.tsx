@@ -3,6 +3,7 @@ import logo from "../assets/logo.png"
 import notification from "../assets/notification.png"
 import world from "../assets/world.png"
 import person from "../assets/person.jpg"
+import { Link } from "react-router-dom"
 
 const NavBar = () => {
   return (
@@ -15,7 +16,9 @@ const NavBar = () => {
         <div className="flex justify-end items-center space-x-5">
           <img src={world} alt="" srcSet="" className="w-[10%]"/>  
        <img src={notification} alt="" srcSet="" className="w-[10%]"/>
-       <img src={person} alt="" srcSet="" className="w-[10%]"/>
+       <Link to="/register" className="w-[10%]">
+       <img src={person} alt="" srcSet=""className="w-full" />
+        </Link>
         </div>
         </nav>
 

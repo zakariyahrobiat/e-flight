@@ -7,7 +7,7 @@ const Register = () => {
   return (
     <BackgroundLayout>
 <NavBar/>
-<div className="mt-20 w-1/2 m-auto bg-neutral-150 shadow-3xl rounded p-5">
+<div className="mt-20 mx-2 md:mx-0 md:w-1/2 m-auto bg-neutral-150 shadow-3xl rounded p-5">
 <h1 className="text-2xl font-bold">Sign Up</h1>
 <CustomInput label="Username" placeholder="Mark"/>
 <CustomInput label="Password" type="password" placeholder="********"/>
