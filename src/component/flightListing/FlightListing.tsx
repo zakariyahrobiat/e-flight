@@ -1,7 +1,7 @@
 import FlightCard from "./FlightCard"
 import FlightFilter from "./FlightFilter"
 import FlightSort from "./FlightSort"
-
+import FlightDetail from "./FlightDetail"
 
 export default function FlightListing() {
   return (
@@ -11,6 +11,7 @@ export default function FlightListing() {
         <FlightFilter/>
         <FlightCard/>
      </div>
+     <FlightDetail></FlightDetail>
     </div>
   )
 }

@@ -156,6 +156,10 @@ const data =[
       type:"1 stop"
     }
    ]
+  //  interface detailData{
+  //   startingPoint: string,
+  //   stopingPoint: string,
+  //  }
    export interface flightCard{
       id: number;
       name: string;
@@ -170,7 +174,11 @@ dates:Date[],
 flightDetail:flightCard[],
 currentItems:flightCard[],
 next:()=>void,
-previous:()=> void
+previous:()=> void,
+detail: flightCard | null
+handleFlightDetail:(id:number)=> void
+show: boolean,
+setShow:(show:boolean)=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -178,11 +186,28 @@ export const AppContext = createContext<AppContextType>({
    currentItems:[],
    next:()=>{},
    previous:()=> {},
+   detail: null,
+   handleFlightDetail:()=>{},
+   show:false,
+   setShow:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
    const [flightDetail, setflightDetail] = useState <flightCard[]>([])
   const [currentPage, setCurrentPage]= useState(0)
+  const [detail, setDetail]= useState<flightCard | null>(null)
+  const [show, setShow] = useState(false)
+  
+  const handleFlightDetail=(id:number)=>{
+    const flight = flightDetail.find((item)=> item.id === id)
+   if (flight) {
+    
+  setDetail(flight) 
+  setShow(true)
+  console.log(flight);
+   
+  }
+}
   const perPage = 8;
 
    const currentItems = useMemo(() => {
@@ -225,6 +250,10 @@ export const Context =(props:PropsWithChildren)=>{
       flightDetail:flightDetail,
       currentItems:currentItems,
       next:next,
-      previous:previous
+      previous:previous,
+      detail:detail,
+      handleFlightDetail: handleFlightDetail,
+      show:show,
+       setShow:setShow
    }}>{props.children}</AppContext.Provider> 
 }
