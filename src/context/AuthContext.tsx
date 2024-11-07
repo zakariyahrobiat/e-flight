@@ -156,10 +156,13 @@ const data =[
       type:"1 stop"
     }
    ]
-  //  interface detailData{
-  //   startingPoint: string,
-  //   stopingPoint: string,
-  //  }
+   interface inputFields {
+    start: string;
+    end: string;
+    tripType: string;
+    travelClass: string;
+    number: number;
+  }
    export interface flightCard{
       id: number;
       name: string;
@@ -179,6 +182,8 @@ detail: flightCard | null
 handleFlightDetail:(id:number)=> void
 show: boolean,
 setShow:(show:boolean)=>void
+input: inputFields
+handleInputs:(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -189,7 +194,7 @@ export const AppContext = createContext<AppContextType>({
    detail: null,
    handleFlightDetail:()=>{},
    show:false,
-   setShow:()=>{}
+   setShow:()=>{}, input:{start:"", end:"",tripType:"" ,travelClass:"", number:1}, handleInputs:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -197,7 +202,11 @@ export const Context =(props:PropsWithChildren)=>{
   const [currentPage, setCurrentPage]= useState(0)
   const [detail, setDetail]= useState<flightCard | null>(null)
   const [show, setShow] = useState(false)
-  
+  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:1 })
+const handleInputs =(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>{
+const {value, name} = e.target
+setInput((input)=>({...input, [name]:value}))
+}
   const handleFlightDetail=(id:number)=>{
     const flight = flightDetail.find((item)=> item.id === id)
    if (flight) {
@@ -254,6 +263,6 @@ export const Context =(props:PropsWithChildren)=>{
       detail:detail,
       handleFlightDetail: handleFlightDetail,
       show:show,
-       setShow:setShow
+       setShow:setShow, input:input, handleInputs:handleInputs
    }}>{props.children}</AppContext.Provider> 
 }

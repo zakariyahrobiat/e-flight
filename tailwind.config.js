@@ -15,7 +15,8 @@ export default {
         "primary-700":"#3F0EA6FF",
         " neutral-900":"#171A1FFF",
         "neutral-400":"#BDC1CAFF",
-        "neutral-500":"#9095A1FF"
+        "neutral-500":"#9095A1FF",
+        "tertiary2-750":"#7D6600FF"
       }
     },
   },
