@@ -7,7 +7,7 @@ interface props{
    discription: string,
    link: string, 
 }
-const InputContent = ({heading, button, option, discription,link}:props) => {
+const InputContent = ({heading, button, option, discription, link}:props) => {
   return (
     <div>
         <h1 className="text-2xl font-bold">{heading}</h1>
