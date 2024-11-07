@@ -22,7 +22,7 @@ const InputContent = ({heading, button, option, discription, link, text}:props) 
 </div>
 <button className="bg-primary-500 px-3 py-1 rounded text-white text-base font-bold">{option}</button>
 <div className="text-left pt-5">
-<p>{discription} <Link to={link}><span className="text-primary-600 underline text-base font-semibold">{text}</span></Link> </p>
+<p>{discription} <Link to={link}><span className="text-primary-600 underline text-base font-semibold"></span></Link> </p>
 </div>
     </div>
   )

@@ -6,11 +6,7 @@ const FlightFilter = () => {
   const [endDate, setEndDate] = useState('');
   const [showInputs, setShowInputs] = useState(false);
   const {input, handleInputs}= useAuth()
-// const [input, setInput]= useState({start:"", end:"",tripType:"" ,travelClass:"", number:"" })
-// const handleInputs =(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>{
-// const {value, name} = e.target
-// setInput((input)=>({...input, [name]:value}))
-// }
+
   const toggleInputs = () => setShowInputs(!showInputs);
   return (
     <div className="w-full">
@@ -19,10 +15,10 @@ const FlightFilter = () => {
             <option value="one-way">One way</option>
             <option value="two-ways">two ways</option>
         </select>
-        <input type="number" name="" placeholder="1" id="" value={input.number} onChange={handleInputs}  className="bg-neutral-200 rounded-2xl text-sm font-normal p-1 w-10"/>
-        <select name="" id=""  value={input.travelClass} onChange={handleInputs} className="bg-neutral-200 rounded-2xl text-sm font-normal p-1">
-            <option value="">Economy</option>
-            <option value="">First class</option>
+        <input type="number" name="number" placeholder="1" id="" value={input.number} onChange={handleInputs}  className="bg-neutral-200 rounded-2xl text-sm font-normal p-1 w-10"/>
+        <select name="travelClass" id=""  value={input.travelClass} onChange={handleInputs} className="bg-neutral-200 rounded-2xl text-sm font-normal p-1">
+            <option value="Economy">Economy</option>
+            <option value="First-class">First class</option>
         </select>
     </div>
     <div className='flex items-center space-x-2 w-full md:space-x-5 justify-between relative'>
