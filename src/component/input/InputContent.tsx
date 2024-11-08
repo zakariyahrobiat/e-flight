@@ -6,8 +6,9 @@ interface props{
    option: string,
    discription: string,
    link: string, 
+   text:string
 }
-const InputContent = ({heading, button, option, discription, link}:props) => {
+const InputContent = ({heading, button, option, discription, link, text}:props) => {
   return (
     <div>
         <h1 className="text-2xl font-bold">{heading}</h1>
@@ -21,7 +22,7 @@ const InputContent = ({heading, button, option, discription, link}:props) => {
 </div>
 <button className="bg-primary-500 px-3 py-1 rounded text-white text-base font-bold">{option}</button>
 <div className="text-left pt-5">
-<p>{discription} <Link to={link}><span className="text-primary-600 underline text-base font-semibold">Sign in here</span></Link> </p>
+<p>{discription} <Link to={link}><span className="text-primary-600 underline text-base font-semibold">{text}</span></Link> </p>
 </div>
     </div>
   )
