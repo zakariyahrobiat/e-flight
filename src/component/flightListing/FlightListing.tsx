@@ -1,7 +1,7 @@
 import FlightCard from "./FlightCard"
 import FlightFilter from "./FlightFilter"
 import FlightSort from "./FlightSort"
-import FlightDetail from "./FlightDetail"
+import FlightDetail from "../flightDetails/FlightDetail"
 
 export default function FlightListing() {
   return (
