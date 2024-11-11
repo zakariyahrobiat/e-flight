@@ -5,6 +5,7 @@ import Details from "./Details"
 import Benefit from "./Benefit"
 import Refund from "./Refund"
 import Reschedule from "./Reschedule"
+import { Link } from "react-router-dom"
 
 const FlightDetail = () => {
     const {detail, setShow, show} = useAuth()
@@ -35,7 +36,7 @@ const FlightDetail = () => {
        </div>
        <div className="flex justify-between items-center mt-1 px-3">
         <p className="text-xl font-semibold text-tertiary2-750">${detail.price}</p>
-        <button className="bg-primary-500 text-sm font-normal text-white py-1 px-2 rounded-2xl">Book now</button>
+       <Link to="/booking"><button className="bg-primary-500 text-sm font-normal text-white py-1 px-2 rounded-2xl">Book now</button></Link>
        </div>
        </div>
        )}

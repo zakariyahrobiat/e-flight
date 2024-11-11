@@ -3,6 +3,7 @@ import LandingPage from '../pages/home/LandingPage'
 import FlightsPage from '../pages/flights/FlightsPage'
 import Register from '../pages/auth/Register'
 import Login from '../pages/auth/Login'
+import BookingPage from '../pages/booking/BookingPage'
 const Routes = createBrowserRouter([
     {
         path:"/",
@@ -19,6 +20,10 @@ const Routes = createBrowserRouter([
     {
         path:"/login",
         element:<Login/>
+    },
+    {
+        path:"/booking",
+        element:<BookingPage/>
     }
 ])
 
