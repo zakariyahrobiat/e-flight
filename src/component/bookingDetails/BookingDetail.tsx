@@ -1,12 +1,19 @@
-import NavBar from "../NavBar"
-import Footer from "../Footer"
+
+import FlightBooking from "./flightBooking"
+import FlightPrice from "./flightPrice"
 const BookingDetail = () => {
+ 
   return (
-    <div>
-      <NavBar/>
+    <div className="text-left px-4 w-full">
+    
       <p className="mt-16 font-bold text-2xl text-neutral-900">My booking</p>
-      <input type="range" name="" min="0" max="100" id="" />
-      <Footer/>
+      
+      <div className="flex w-full">
+        <FlightBooking/>
+        <FlightPrice/>
+
+      </div>
+  
     </div>
   )
 }
