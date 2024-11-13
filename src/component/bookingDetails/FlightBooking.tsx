@@ -1,17 +1,25 @@
-import { useAuth } from "../../hooks/useAuth"
+import BookingHeader from "./BookingHeader"
+import FlightPurchase from "./FlightPurchase"
+import FlightTicket from "./FlightTicket"
+import PassangerDetails from "./PassangerDetails"
+  import { useAuth } from "../../hooks/useAuth"  
 const FlightBooking = () => {
-    const {progress} = useAuth()
+  const {bookingTab} = useAuth()
+ const tabContent = {
+  passangerDetail:<PassangerDetails/>,
+  flightPurchase:<FlightPurchase/>,
+  flightTicket:<FlightTicket/>
+ }
+
+
+ 
   return (
     <div className="w-3/4">
-        <div className="w-1/2 text-center m-auto">
-      <input type="range" name="" min="0" max="100" id="" value={progress} className="w-full" />
-      <div className="flex justify-between items-center">
-        <p className="text-sm font-medium text-primary-500">Booking</p>
-        <p className="text-sm font-medium text-primary-500">Purchase</p>
-        <p className="text-sm font-medium text-primary-500">Get your E-ticket</p>
+       <BookingHeader/> 
+       {tabContent[bookingTab as keyof typeof tabContent]}
+
       </div>
-      </div>
-    </div>
+   
   )
 }
 

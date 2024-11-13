@@ -1,5 +1,8 @@
-
+import { useAuth } from "../../hooks/useAuth"
+import { BenefitProps } from "../flightDetails/Benefit"
 const FlightPrice = () => {
+    const {input} = useAuth()
+    const {tripType} = input
   return (
     <div className="w-1/4">
           <p className="text-xl font-bold text-neutral-700">Price details</p>
@@ -50,6 +53,11 @@ const FlightPrice = () => {
                         </tr>
                     </tbody>
                 </table>
+        </div>
+        <div className="" >
+          <BenefitProps/>  
+          {tripType === "two-ways" &&(<BenefitProps/>)}
+
         </div>
     </div>
   )

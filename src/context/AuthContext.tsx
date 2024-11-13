@@ -185,7 +185,9 @@ setShow:(show:boolean)=>void
 input: inputFields
 handleInputs:(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>void,
 progress:number,
-updateProgress:()=>void
+updateProgress:()=>void,
+bookingTab: string,
+setBookingTab:(booking:string)=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -198,7 +200,9 @@ export const AppContext = createContext<AppContextType>({
    show:false,
    setShow:()=>{}, input:{start:"", end:"",tripType:"" ,travelClass:"", number:1}, handleInputs:()=>{},
    progress:0,
-   updateProgress:()=>{}
+   updateProgress:()=>{},
+   bookingTab:"", 
+   setBookingTab:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -208,6 +212,9 @@ export const Context =(props:PropsWithChildren)=>{
   const [show, setShow] = useState(false)
   const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:1 })
   const [progress, setProgress]= useState(0)
+  // const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" |"flightTicket">("passangerDetail")
+  const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
+
   const updateProgress=()=>{
     setProgress(progress=>(progress < 100 ? progress + 50 : 0))
   }
@@ -272,6 +279,8 @@ setInput((input)=>({...input, [name]:value}))
       handleFlightDetail: handleFlightDetail,
       show:show,
        setShow:setShow, input:input, handleInputs:handleInputs,
-       progress:progress, updateProgress:updateProgress
+       progress:progress, updateProgress:updateProgress,
+       bookingTab:bookingTab,
+       setBookingTab:setBookingTab
    }}>{props.children}</AppContext.Provider> 
 }

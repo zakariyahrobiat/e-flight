@@ -1,5 +1,5 @@
 import { useAuth } from "../../hooks/useAuth"
-const BenefitProps=()=>{
+export const BenefitProps=()=>{
     const {detail, input} = useAuth()
     const {start, end, travelClass} = input
 return(

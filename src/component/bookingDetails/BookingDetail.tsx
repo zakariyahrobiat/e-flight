@@ -8,7 +8,7 @@ const BookingDetail = () => {
     
       <p className="mt-16 font-bold text-2xl text-neutral-900">My booking</p>
       
-      <div className="flex w-full">
+      <div className="flex w-full gap-10">
         <FlightBooking/>
         <FlightPrice/>
 
