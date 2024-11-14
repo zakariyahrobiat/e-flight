@@ -51,7 +51,7 @@ const FlightPurchase = () => {
         <div>
           <p className="text-xs font-normal text-neutral-900">By selecting the button below, I agree to the Property Rules, Terms and Conditions, and Privacy Policy </p>
         </div>
-        <button className="bg-primary-500 text-white font-normal text-base w-full mt-10 py-1" onClick={()=>{setBookingTab("e-flight");updateProgress()} }>Submit</button>
+        <button className="bg-primary-500 text-white font-normal text-base w-full mt-10 py-1" onClick={()=>{setBookingTab("flightPurchase");updateProgress()} }>Submit</button>
         </form>
     </div>
   )
