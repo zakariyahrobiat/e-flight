@@ -1,6 +1,6 @@
 
-import FlightBooking from "./flightBooking"
-import FlightPrice from "./flightPrice"
+import FlightBooking from "./FlightBooking"
+import FlightPrice from "./FlightPrice"
 const BookingDetail = () => {
  
   return (
