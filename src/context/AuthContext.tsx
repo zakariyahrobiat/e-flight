@@ -186,8 +186,8 @@ input: inputFields
 handleInputs:(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>void,
 progress:number,
 updateProgress:()=>void,
-bookingTab: string,
-setBookingTab:(booking:string)=>void
+bookingTab: "passangerDetail" | "flightPurchase" | "flightTicket";
+setBookingTab:(bookingTab:"passangerDetail" | "flightPurchase" | "flightTicket")=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -201,7 +201,7 @@ export const AppContext = createContext<AppContextType>({
    setShow:()=>{}, input:{start:"", end:"",tripType:"" ,travelClass:"", number:1}, handleInputs:()=>{},
    progress:0,
    updateProgress:()=>{},
-   bookingTab:"", 
+   bookingTab:"passangerDetail", 
    setBookingTab:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
