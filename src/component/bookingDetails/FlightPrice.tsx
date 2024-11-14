@@ -4,7 +4,7 @@ const FlightPrice = () => {
     const {input} = useAuth()
     const {tripType} = input
   return (
-    <div className="w-1/4">
+    <div className=" hidden md:block md:w-1/4">
           <p className="text-xl font-bold text-neutral-700">Price details</p>
           <hr  className="my-2"/>
          <div className="w-full">

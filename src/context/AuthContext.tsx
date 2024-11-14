@@ -156,6 +156,11 @@ const data =[
       type:"1 stop"
     }
    ]
+   interface Country{
+    name:{
+      common: string
+    }
+  }
    interface inputFields {
     start: string;
     end: string;
@@ -186,8 +191,9 @@ input: inputFields
 handleInputs:(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>void,
 progress:number,
 updateProgress:()=>void,
-bookingTab: "passangerDetail" | "flightPurchase" | "flightTicket";
-setBookingTab:(bookingTab:"passangerDetail" | "flightPurchase" | "flightTicket")=>void
+bookingTab: "passangerDetail" | "flightPurchase" | "flightTicket",
+setBookingTab:(bookingTab:"passangerDetail" | "flightPurchase" | "flightTicket")=>void,
+country:Country[]
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -202,7 +208,8 @@ export const AppContext = createContext<AppContextType>({
    progress:0,
    updateProgress:()=>{},
    bookingTab:"passangerDetail", 
-   setBookingTab:()=>{}
+   setBookingTab:()=>{},
+   country:[]
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -214,7 +221,21 @@ export const Context =(props:PropsWithChildren)=>{
   const [progress, setProgress]= useState(0)
   // const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" |"flightTicket">("passangerDetail")
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
+  const [country, setCountry] = useState<Country[]>([])
+  const fetchApi = async()=>{
+const url="https://restcountries.com/v3.1/all"
+const fetchUrl = await fetch(url) 
+const data = await fetchUrl.json()
+const sortedData = data.sort((a: Country, b: Country) => 
+  a.name.common.localeCompare(b.name.common)
+);
 
+setCountry(sortedData)
+
+  }
+  useEffect(()=>{
+    fetchApi()
+  },[])
   const updateProgress=()=>{
     setProgress(progress=>(progress < 100 ? progress + 50 : 0))
   }
@@ -281,6 +302,7 @@ setInput((input)=>({...input, [name]:value}))
        setShow:setShow, input:input, handleInputs:handleInputs,
        progress:progress, updateProgress:updateProgress,
        bookingTab:bookingTab,
-       setBookingTab:setBookingTab
+       setBookingTab:setBookingTab,
+       country:country
    }}>{props.children}</AppContext.Provider> 
 }
