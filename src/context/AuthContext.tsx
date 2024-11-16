@@ -219,7 +219,6 @@ export const Context =(props:PropsWithChildren)=>{
   const [show, setShow] = useState(false)
   const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:1 })
   const [progress, setProgress]= useState(0)
-  // const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" |"flightTicket">("passangerDetail")
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
   const fetchApi = async()=>{
