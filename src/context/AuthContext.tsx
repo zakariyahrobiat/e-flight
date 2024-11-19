@@ -204,7 +204,7 @@ export const AppContext = createContext<AppContextType>({
    detail: null,
    handleFlightDetail:()=>{},
    show:false,
-   setShow:()=>{}, input:{start:"", end:"",tripType:"" ,travelClass:"", number:1}, handleInputs:()=>{},
+   setShow:()=>{}, input:{start:"", end:"",tripType:"" ,travelClass:"", number:0}, handleInputs:()=>{},
    progress:0,
    updateProgress:()=>{},
    bookingTab:"passangerDetail", 
@@ -217,7 +217,7 @@ export const Context =(props:PropsWithChildren)=>{
   const [currentPage, setCurrentPage]= useState(0)
   const [detail, setDetail]= useState<flightCard | null>(null)
   const [show, setShow] = useState(false)
-  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:1 })
+  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:0 })
   const [progress, setProgress]= useState(0)
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
