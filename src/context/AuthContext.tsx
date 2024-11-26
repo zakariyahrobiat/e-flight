@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useMemo } from "react";
 import { PropsWithChildren } from "react";
+import duffelApi from "../duffel";
 const data =[
    {
      id:1,
@@ -221,6 +222,22 @@ export const Context =(props:PropsWithChildren)=>{
   const [progress, setProgress]= useState(0)
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
+  
+  
+
+ const searchFlights = async (data: any) => {
+    try {
+      const response = await duffelApi.post("/air/offers", data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching flight offers:", error);
+      throw error;
+    }
+  };
+  
+  
+  
+  
   const fetchApi = async()=>{
 const url="https://restcountries.com/v3.1/all"
 const fetchUrl = await fetch(url) 
@@ -234,6 +251,7 @@ setCountry(sortedData)
   }
   useEffect(()=>{
     fetchApi()
+  searchFlights()
   },[])
   const updateProgress=()=>{
     setProgress(progress=>(progress < 100 ? progress + 50 : 0))
