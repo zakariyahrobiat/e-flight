@@ -91,11 +91,11 @@ fontSize = 8}:BarcodeProps) => {
         </div>
         <div className="py-1 md:py-2">
         <p className="text-sm py-1 text-neutral-550 font-medium">Booking ID</p>
-        <p className="text-2xl text-neutral-550 font-medium">65980165 </p>
+        <p className="text-xl md:text-2xl text-neutral-550 font-medium">65980165 </p>
         </div>
         <div>
           <p className="text-sm text-neutral-550 font-medium">Airline Booking Code</p>
-          <p className="text-2xl text-neutral-550 font-medium">CA-6018</p>
+          <p className="text-xl md:text-2xl text-neutral-550 font-medium">CA-6018</p>
         </div>
         <div className="flex justify-center mt-1 md:mt-5">
         <svg ref={svgRef2}></svg>
