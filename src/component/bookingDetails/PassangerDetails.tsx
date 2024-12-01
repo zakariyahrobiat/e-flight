@@ -1,18 +1,19 @@
 import { useAuth } from "../../hooks/useAuth"
 import BookingInput from "../input/BookingInput";
 const PassangerDetails = () => {
-    const {setBookingTab, updateProgress, country} = useAuth()
+    const {setBookingTab, updateProgress, country, input, handleInputs} = useAuth()
+    const {name, surname, title}= input
   return (
     <div className="pt-3 pb-20">
       <p className="font-semibold text-xl text-secondary-500">Passenger details</p>
       <p className="text-sm font-normal text-neutral-600">Name as on ID card/passport without title and punctuation</p>
       <form action="">
         <div className="grid grid-cols-2  gap-3 md:gap-5">
-        <BookingInput variant="input" label="Name" placeholder="Input text"/>
-        <BookingInput variant="input" label="Surname" placeholder="Input text"/>
+        <BookingInput variant="input" name="name" value={name} onChange={handleInputs} label="Name" placeholder="Input text"/>
+        <BookingInput variant="input" name="surname" value={surname} onChange={handleInputs} label="Surname" placeholder="Input text"/>
         </div>
         <div className="grid grid-cols-3 gap-1 md:gap-5">
-         <BookingInput variant="select" label="Title" placeholder="Input text" options={[{value:"mr", label:"Mr"}, {value:"miss", label:"Miss"},{value:"mrs", label:"Mrs"}]}/>
+         <BookingInput variant="select" name="title" label="Title" placeholder="Input text" value={title} onChange={handleInputs} options={[{value:"mr", label:"Mr"}, {value:"miss", label:"Miss"},{value:"mrs", label:"Mrs"}]}/>
          <BookingInput variant="input" type="date" label="Birthday" placeholder="Input text"/>
          <BookingInput variant="select" label="Nationality" placeholder="Select" options={country.map((c)=>({value: c.name.common, label:c.name.common}))}/>
         </div>

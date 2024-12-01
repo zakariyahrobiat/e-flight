@@ -48,7 +48,7 @@ fontSize = 8}:BarcodeProps) => {
   
    
   const {detail, input}= useAuth()
-  const {start, travelClass, number, end} = input
+  const {start, travelClass, number, end, name, surname, title} = input
   return (
     <div className="w-full">
      
@@ -56,7 +56,7 @@ fontSize = 8}:BarcodeProps) => {
         <div className="flex justify-between items-center py-2 md:py-5  w-2/3">
         <div className="w-7/12">
         <p className="text-sm font-semibold text-neutral-700">{detail?.name}</p>
-        <p className="py-1 md:py-2 text-xs md:text-sm font-normal text-neutral-500">Passenger:  <b className="text-xs md:text-base text-neutral-900 uppercase">Anna Anderson</b></p>
+        <p className="py-1 md:py-2 text-xs md:text-sm font-normal text-neutral-500">Passenger:  <b className="text-xs md:text-base text-neutral-900 uppercase">{title} {name} {surname}</b></p>
         <p className="text-sm font-normal text-tertiary2-750 md:pb-2">{travelClass}</p>
         <div className="flex justify-between items-center py-1 md:py-2">
           <div>

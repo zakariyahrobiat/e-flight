@@ -16,7 +16,7 @@ const FlightFilter = () => {
             <option value="two-ways">two ways</option>
         </select>
         <input type="number" name="number" placeholder="1" id="" value={input.number} onChange={handleInputs}  className="bg-neutral-200 rounded-2xl text-sm font-normal p-1 w-10"/>
-        <select name="travelClass" id=""  value={input.travelClass} onChange={handleInputs} className="bg-neutral-200 rounded-2xl text-sm font-normal p-1">
+        <select name="travelClass" id="" value={input.travelClass} onChange={handleInputs} className="bg-neutral-200 rounded-2xl text-sm font-normal p-1">
             <option value="Economy">Economy</option>
             <option value="Business">Business</option>
             <option value="First-class">First class</option>
