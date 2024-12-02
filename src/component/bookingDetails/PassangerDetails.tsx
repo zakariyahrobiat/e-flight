@@ -2,7 +2,7 @@ import { useAuth } from "../../hooks/useAuth"
 import BookingInput from "../input/BookingInput";
 const PassangerDetails = () => {
     const {setBookingTab, updateProgress, country, input, handleInputs} = useAuth()
-    const {name, surname, title}= input
+    const {name, surname, title, email, phoneNumber}= input
   return (
     <div className="pt-3 pb-20">
       <p className="font-semibold text-xl text-secondary-500">Passenger details</p>
@@ -39,13 +39,13 @@ Avoid any mistake, because some airlines don't allow name corrections after book
       <p className="font-semibold text-xl text-secondary-500">Contact details</p>
    
       <div className="grid grid-cols-2 gap-3 md:gap-5">
-        <BookingInput variant="input" label="Name" placeholder="Input text"/>
-        <BookingInput variant="input" label="Surname" placeholder="Input text"/>
+        <BookingInput variant="input" name="name" value={name} onChange={handleInputs} label="Name" placeholder="Input text"/>
+        <BookingInput variant="input" label="Surname" name="surname"  value="surname" onChange={handleInputs} placeholder="Input text"/>
         </div>
         <div className="grid grid-cols-3 gap-1 md:gap-5">
-         <BookingInput variant="select" label="Title" placeholder="Input text" options={[{value:"mr", label:"Mr"}, {value:"miss", label:"Miss"},{value:"mrs", label:"Mrs"}]}/>
-         <BookingInput variant="input" type="email" label="Email" placeholder="Input text"/>
-         <BookingInput variant="input" label="Phone number" placeholder="Input text"/>
+         <BookingInput variant="select" name="title" value={title} onChange={handleInputs} label="Title" placeholder="Input text" options={[{value:"mr", label:"Mr"}, {value:"miss", label:"Miss"},{value:"mrs", label:"Mrs"}]}/>
+         <BookingInput variant="input" type="email" name="email" value={email} onChange={handleInputs} label="Email" placeholder="Input text"/>
+         <BookingInput variant="input" name="phone-number" value={phoneNumber} onChange={handleInputs} label="Phone number" placeholder="Input text"/>
         </div>
       
       </div>
