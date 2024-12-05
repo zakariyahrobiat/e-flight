@@ -40,12 +40,12 @@ Avoid any mistake, because some airlines don't allow name corrections after book
    
       <div className="grid grid-cols-2 gap-3 md:gap-5">
         <BookingInput variant="input" name="name" value={name} onChange={handleInputs} label="Name" placeholder="Input text"/>
-        <BookingInput variant="input" label="Surname" name="surname"  value="surname" onChange={handleInputs} placeholder="Input text"/>
+        <BookingInput variant="input" label="Surname" name="surname"  value={surname} onChange={handleInputs} placeholder="Input text"/>
         </div>
         <div className="grid grid-cols-3 gap-1 md:gap-5">
          <BookingInput variant="select" name="title" value={title} onChange={handleInputs} label="Title" placeholder="Input text" options={[{value:"mr", label:"Mr"}, {value:"miss", label:"Miss"},{value:"mrs", label:"Mrs"}]}/>
          <BookingInput variant="input" type="email" name="email" value={email} onChange={handleInputs} label="Email" placeholder="Input text"/>
-         <BookingInput variant="input" name="phone-number" value={phoneNumber} onChange={handleInputs} label="Phone number" placeholder="Input text"/>
+         <BookingInput variant="input" name="phoneNumber" value={phoneNumber} onChange={handleInputs} label="Phone number" placeholder="Input text"/>
         </div>
       
       </div>
