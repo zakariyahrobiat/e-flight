@@ -1,6 +1,8 @@
 import sort from "../../assets/sort.png"
 import filter from "../../assets/filter.png"
+import { useAuth } from "../../hooks/useAuth"
 const FlightSort = () => {
+    const {handlePriceInAscendingOrder, handlePriceInDecreasingOrder, isAscendingChecked, isDecreasingChecked} = useAuth()
     return (
         <div className="w-1/4 text-left hidden md:block">
      
@@ -13,11 +15,11 @@ const FlightSort = () => {
                 <p className="text-base font-semibold">Price</p>
                 <div>
                     <div className="flex space-x-2 items-center py-2 ">
-                    <input type="radio" name="low" id="" />
+                    <input type="radio" name="low" id="low" onChange={handlePriceInAscendingOrder} checked={isAscendingChecked} />
                     <label htmlFor="low" className="text-sm font-normal text-neutral-900">Lowest price</label>
                     </div>
                     <div className="flex space-x-2 items-center">
-                    <input type="radio" name="high" id="" />
+                    <input type="radio" name="high" id="high" onChange={handlePriceInDecreasingOrder}checked={isDecreasingChecked} />
                     <label htmlFor="high" className="text-sm font-normal text-neutral-900">Highest price</label>
                     </div>
                 </div>
@@ -37,6 +39,10 @@ const FlightSort = () => {
                     <div className="flex space-x-2 items-center">
                     <input type="checkbox" name="transit" id="" />
                     <label htmlFor="transit" className="text-sm font-normal text-neutral-900">1 transit</label>
+                    </div>
+                    <div className="flex space-x-2 items-center">
+                    <input type="checkbox" name="2-transit" id="" />
+                    <label htmlFor="2-transit" className="text-sm font-normal text-neutral-900">2 transit</label>
                     </div>
                 </div>
                 <hr className="w-full"/>

@@ -13,7 +13,7 @@ const FlightCard = () => {
 })}
   </div>
 <div>
-  {currentItems.map((item)=>{
+  {currentItems().map((item)=>{
     const {id, name, time, hours, price, type, weight} = item
     return(
      <div className="" key={id}>

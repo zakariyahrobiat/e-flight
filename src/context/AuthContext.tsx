@@ -9,7 +9,7 @@ const data =[
      time:"10:25PM - 7:06AM",
      hours:"10 hr 41 min",
      price:275.5,
-     type:"1 stop"
+     type:"direct"
    },
    {
      id:2,
@@ -17,7 +17,7 @@ const data =[
      weight:25,
      time:"6:30AM - 7:55AM",
      hours:"3 hr 25 min",
-     price:206,
+     price:296,
      type:"1 stop"
    },
    {
@@ -26,8 +26,8 @@ const data =[
      weight:25,
      time:"6:30AM - 7:55AM",
      hours:"3 hr 25 min",
-     price:206,
-     type:"1 stop"
+     price:236,
+     type:"2 stop"
    }
    ,
    {
@@ -36,8 +36,8 @@ const data =[
      weight:25,
      time:"6:30AM - 7:55AM",
      hours:"3 hr 25 min",
-     price:206,
-     type:"1 stop"
+     price:217,
+     type:"direct"
    }
    ,
    {
@@ -46,7 +46,7 @@ const data =[
      weight:25,
      time:"6:30AM - 7:55AM",
      hours:"3 hr 25 min",
-     price:206,
+     price:256,
      type:"1 stop"
    }
    ,
@@ -56,8 +56,8 @@ const data =[
      weight:25,
      time:"6:30AM - 7:55AM",
      hours:"3 hr 25 min",
-     price:206,
-     type:"1 stop"
+     price:213,
+     type:"2 stop"
    }
    ,
    {
@@ -66,8 +66,8 @@ const data =[
      weight:25,
      time:"6:30AM - 7:55AM",
      hours:"3 hr 25 min",
-     price:206,
-     type:"1 stop"
+     price:219,
+     type:"direct"
    }
    ,
    {
@@ -76,7 +76,7 @@ const data =[
      weight:25,
      time:"6:30AM - 7:55AM",
      hours:"3 hr 25 min",
-     price:206,
+     price:268,
      type:"1 stop"
    },
    {
@@ -85,8 +85,8 @@ const data =[
     weight:25,
       time:"10:25PM - 7:06AM",
       hours:"10 hr 41 min",
-      price:275.5,
-      type:"1 stop"
+      price:299.5,
+      type:"2 stop"
     },
     {
       id:10,
@@ -94,8 +94,8 @@ const data =[
       weight:25,
       time:"6:30AM - 7:55AM",
       hours:"3 hr 25 min",
-      price:206,
-      type:"1 stop"
+      price:276,
+      type:"direct"
     },
     {
       id:11,
@@ -103,7 +103,7 @@ const data =[
       weight:25,
       time:"6:30AM - 7:55AM",
       hours:"3 hr 25 min",
-      price:206,
+      price:226,
       type:"1 stop"
     }
     ,
@@ -113,8 +113,8 @@ const data =[
       weight:25,
       time:"6:30AM - 7:55AM",
       hours:"3 hr 25 min",
-      price:206,
-      type:"1 stop"
+      price:214,
+      type:"2 stop"
     }
     ,
     {
@@ -123,8 +123,8 @@ const data =[
       weight:25,
       time:"6:30AM - 7:55AM",
       hours:"3 hr 25 min",
-      price:206,
-      type:"1 stop"
+      price:208,
+      type:"direct"
     }
     ,
     {
@@ -133,7 +133,7 @@ const data =[
       weight:25,
       time:"6:30AM - 7:55AM",
       hours:"3 hr 25 min",
-      price:206,
+      price:296,
       type:"1 stop"
     }
     ,
@@ -143,8 +143,8 @@ const data =[
       weight:25,
       time:"6:30AM - 7:55AM",
       hours:"3 hr 25 min",
-      price:206,
-      type:"1 stop"
+      price:263,
+      type:"2 stop"
     }
     ,
     {
@@ -153,8 +153,8 @@ const data =[
       weight:25,
       time:"6:30AM - 7:55AM",
       hours:"3 hr 25 min",
-      price:206,
-      type:"1 stop"
+      price:272,
+      type:"direct"
     }
    ]
    interface Country{
@@ -186,7 +186,7 @@ const data =[
 interface AppContextType{
 dates:Date[],
 flightDetail:flightCard[],
-currentItems:flightCard[],
+currentItems:()=>flightCard[],
 next:()=>void,
 previous:()=> void,
 detail: flightCard | null
@@ -199,12 +199,16 @@ progress:number,
 updateProgress:()=>void,
 bookingTab: "passangerDetail" | "flightPurchase" | "flightTicket",
 setBookingTab:(bookingTab:"passangerDetail" | "flightPurchase" | "flightTicket")=>void,
-country:Country[]
+country:Country[],
+handlePriceInAscendingOrder:()=>void,
+handlePriceInDecreasingOrder:()=>void,
+isAscendingChecked:boolean,
+  isDecreasingChecked:boolean,
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
    flightDetail:[],
-   currentItems:[],
+   currentItems:()=>[],
    next:()=>{},
    previous:()=> {},
    detail: null,
@@ -217,7 +221,11 @@ export const AppContext = createContext<AppContextType>({
    updateProgress:()=>{},
    bookingTab:"passangerDetail", 
    setBookingTab:()=>{},
-   country:[]
+   country:[],
+   handlePriceInAscendingOrder:()=>{},
+   handlePriceInDecreasingOrder:()=> {},
+   isAscendingChecked:false,
+    isDecreasingChecked: false
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -229,8 +237,22 @@ export const Context =(props:PropsWithChildren)=>{
   const [progress, setProgress]= useState(0)
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
+  const [isAscendingChecked, setisAscendingChecked] = useState(false)
+  const [isDecreasingChecked, setIsDecreasingChecked] = useState(false)
   
-  
+  const handlePriceInAscendingOrder =()=>{  
+let sortFlightInAscendingOrder = [...flightDetail].sort((a, b)=> a.price-b.price)
+setflightDetail(sortFlightInAscendingOrder)
+setisAscendingChecked(true)
+setIsDecreasingChecked(false)
+
+  }
+  const handlePriceInDecreasingOrder=()=>{
+const sortFlightInDecreasingOrder = [...flightDetail].sort((a,b)=>b.price-a.price)
+setflightDetail(sortFlightInDecreasingOrder)
+setisAscendingChecked(false)
+setIsDecreasingChecked(true)
+  }
 
   
   
@@ -249,7 +271,6 @@ setCountry(sortedData)
   }
   useEffect(()=>{
     fetchApi()
- 
   },[])
   const updateProgress=()=>{
     setProgress(progress=>(progress < 100 ? progress + 50 : 0))
@@ -268,13 +289,14 @@ setInput((input)=>({...input, [name]:value}))
    
   }
 }
-  const perPage = 8;
 
-   const currentItems = useMemo(() => {
-    const startPage = perPage * currentPage;
-    const endPage = startPage + perPage;
-    return flightDetail.slice(startPage, endPage);
-  }, [currentPage, flightDetail]);
+  const perPage = 8;
+  const currentItems =():flightCard[]=>{
+   const startIndex = currentPage * perPage
+  return flightDetail.slice(startIndex,  startIndex + perPage)
+  }
+
+ 
 
   const next = () => {
     if ((currentPage + 1) * perPage < flightDetail.length) {
@@ -318,6 +340,10 @@ setInput((input)=>({...input, [name]:value}))
        progress:progress, updateProgress:updateProgress,
        bookingTab:bookingTab,
        setBookingTab:setBookingTab,
-       country:country
+       country:country,
+       handlePriceInAscendingOrder:handlePriceInAscendingOrder,
+       handlePriceInDecreasingOrder:handlePriceInDecreasingOrder,
+       isAscendingChecked:isAscendingChecked,
+        isDecreasingChecked:isDecreasingChecked
    }}>{props.children}</AppContext.Provider> 
 }
