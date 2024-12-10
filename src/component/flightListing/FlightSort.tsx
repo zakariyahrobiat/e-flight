@@ -2,7 +2,7 @@ import sort from "../../assets/sort.png"
 import filter from "../../assets/filter.png"
 import { useAuth } from "../../hooks/useAuth"
 const FlightSort = () => {
-    const {handlePriceInAscendingOrder, handlePriceInDecreasingOrder, isAscendingChecked, isDecreasingChecked} = useAuth()
+    const {handlePriceInAscendingOrder, handlePriceInDecreasingOrder, isAscendingChecked, isDecreasingChecked, handleTransit, selectedFilter} = useAuth()
     return (
         <div className="w-1/4 text-left hidden md:block">
      
@@ -33,16 +33,12 @@ const FlightSort = () => {
                 <p className="text-base font-semibold">No. of transit</p>
                 <div className="pb-1">
                     <div className="flex space-x-2 items-center py-2">
-                    <input type="checkbox" name="direct" id="" />
+                    <input type="checkbox" name="direct" id="" checked={selectedFilter === "direct"} onChange={()=>handleTransit("direct")} />
                     <label htmlFor="direct"className="text-sm font-normal text-neutral-900">Direct</label>
                     </div>
                     <div className="flex space-x-2 items-center">
-                    <input type="checkbox" name="transit" id="" />
+                    <input type="checkbox" name="transit" id="" checked={selectedFilter=== "1 stop"} onChange={()=>handleTransit("1 stop")} />
                     <label htmlFor="transit" className="text-sm font-normal text-neutral-900">1 transit</label>
-                    </div>
-                    <div className="flex space-x-2 items-center">
-                    <input type="checkbox" name="2-transit" id="" />
-                    <label htmlFor="2-transit" className="text-sm font-normal text-neutral-900">2 transit</label>
                     </div>
                 </div>
                 <hr className="w-full"/>

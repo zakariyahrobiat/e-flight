@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect} from "react";
 import { PropsWithChildren } from "react";
+import FlightDetail from "../component/flightDetails/FlightDetail";
+import FlightCard from "../component/flightListing/FlightCard";
 
 const data =[
    {
@@ -186,6 +188,7 @@ const data =[
 interface AppContextType{
 dates:Date[],
 flightDetail:flightCard[],
+filteredFlight:flightCard[],
 currentItems:()=>flightCard[],
 next:()=>void,
 previous:()=> void,
@@ -204,10 +207,13 @@ handlePriceInAscendingOrder:()=>void,
 handlePriceInDecreasingOrder:()=>void,
 isAscendingChecked:boolean,
   isDecreasingChecked:boolean,
+  handleTransit:(type:string)=>void, 
+  selectedFilter:string
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
    flightDetail:[],
+   filteredFlight:[],
    currentItems:()=>[],
    next:()=>{},
    previous:()=> {},
@@ -225,7 +231,9 @@ export const AppContext = createContext<AppContextType>({
    handlePriceInAscendingOrder:()=>{},
    handlePriceInDecreasingOrder:()=> {},
    isAscendingChecked:false,
-    isDecreasingChecked: false
+    isDecreasingChecked: false,
+    handleTransit:()=>{},
+    selectedFilter:""
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -238,14 +246,32 @@ export const Context =(props:PropsWithChildren)=>{
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
   const [isAscendingChecked, setisAscendingChecked] = useState(false)
-  const [isDecreasingChecked, setIsDecreasingChecked] = useState(false)
-  
+  const [isDecreasingChecked, setIsDecreasingChecked] = useState(false) 
+const [filteredFlight, setFilteredFlights] = useState<flightCard[]>([]);
+const [selectedFilter, setSelectedFilter] = useState<string>("");
+const handleTransit = (type: string) => {
+  if (selectedFilter === type){
+    setSelectedFilter("")
+    setFilteredFlights(flightDetail)
+  }
+  else{
+    setSelectedFilter(type)
+    const filteredItem = flightDetail.filter((item)=>item.type === type)
+    setFilteredFlights(filteredItem)
+  }
+
+ 
+};
+useEffect(() => {
+  setflightDetail(data);
+  setFilteredFlights(data);
+}, []);
+
   const handlePriceInAscendingOrder =()=>{  
-let sortFlightInAscendingOrder = [...flightDetail].sort((a, b)=> a.price-b.price)
+const sortFlightInAscendingOrder = [...flightDetail].sort((a, b)=> a.price-b.price)
 setflightDetail(sortFlightInAscendingOrder)
 setisAscendingChecked(true)
 setIsDecreasingChecked(false)
-
   }
   const handlePriceInDecreasingOrder=()=>{
 const sortFlightInDecreasingOrder = [...flightDetail].sort((a,b)=>b.price-a.price)
@@ -253,12 +279,7 @@ setflightDetail(sortFlightInDecreasingOrder)
 setisAscendingChecked(false)
 setIsDecreasingChecked(true)
   }
-
-  
-  
-  
-  
-  const fetchApi = async()=>{
+const fetchApi = async()=>{
 const url="https://restcountries.com/v3.1/all"
 const fetchUrl = await fetch(url) 
 const data = await fetchUrl.json()
@@ -293,7 +314,7 @@ setInput((input)=>({...input, [name]:value}))
   const perPage = 8;
   const currentItems =():flightCard[]=>{
    const startIndex = currentPage * perPage
-  return flightDetail.slice(startIndex,  startIndex + perPage)
+  return filteredFlight.slice(startIndex,  startIndex + perPage)
   }
 
  
@@ -324,8 +345,7 @@ setInput((input)=>({...input, [name]:value}))
  
    useEffect(()=>{
      setDate(generateDates())
-     setflightDetail(data)
-   },[])
+       },[])
   
    return  <AppContext.Provider value={{
       dates:dates,
@@ -344,6 +364,9 @@ setInput((input)=>({...input, [name]:value}))
        handlePriceInAscendingOrder:handlePriceInAscendingOrder,
        handlePriceInDecreasingOrder:handlePriceInDecreasingOrder,
        isAscendingChecked:isAscendingChecked,
-        isDecreasingChecked:isDecreasingChecked
+        isDecreasingChecked:isDecreasingChecked,
+        handleTransit:handleTransit,
+        filteredFlight:filteredFlight,
+        selectedFilter:selectedFilter
    }}>{props.children}</AppContext.Provider> 
 }
