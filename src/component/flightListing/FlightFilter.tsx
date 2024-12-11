@@ -5,7 +5,7 @@ const FlightFilter = () => {
     const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [showInputs, setShowInputs] = useState(false);
-  const {input, handleInputs}= useAuth()
+  const {input, handleInputs, searchCity}= useAuth()
 
   const toggleInputs = () => setShowInputs(!showInputs);
   return (
@@ -68,7 +68,7 @@ const FlightFilter = () => {
       )}
        </div>
        <div className="bg-primary-600 rounded-3xl p-2">
-       <FaSearch className='text-white' />
+       <FaSearch className='text-white' onClick={()=>searchCity()} />
     </div>
     </div>
     </div>

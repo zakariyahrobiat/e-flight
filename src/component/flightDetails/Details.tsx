@@ -1,28 +1,24 @@
 import { useAuth } from "../../hooks/useAuth"
-interface props{
-    startDate:string,
-    endDate: string,
-    hours: string,
-}
 
-export const Flight = ({startDate, endDate, hours}:props) => {
-    const {input} = useAuth()
+export const Flight = () => {
+    const {input, detail} = useAuth()
+
     const {start, travelClass, number, end} =input
 
   return (
-    <div className="h-[42%] bg-neutral-100 px-3 py-1">
+    <div className="h-[42%] bg-neutral-100 px-3 py-0">
         <div className="flex justify-start h-full items-start space-x-3"> 
             <div className="flex flex-col justify-between h-full">
-                <p className="font-medium text-base text-secondary-500">{startDate}</p>
-                <p className="text-sm font-normal text-neutral-900">{endDate}"</p>
-                <p className="font-medium text-base text-secondary-500">{hours}</p>
+                <p className="font-medium text-base text-secondary-500">{detail?.departure}</p>
+                <p className="text-sm font-normal text-neutral-900">{detail?.duration}"</p>
+                <p className="font-medium text-base text-secondary-500">{detail?.arrival}</p>
             </div>
             <div className="border h-full border-secondary-500"></div>
             <div>
             <p className="text-base font-medium text-neutral-900">{start}</p>
-        <p className="text-sm font-normal text-neutral-600">George Bush Intercontinental Airport, Houston</p>
+        <p className="text-sm font-normal text-neutral-600">{detail?.departureAirport}</p>
         <div className="flex items-center space-x-3 text-sm font-normal text-primary-600 pt-2 pb-1">
-        <p>CA-6018</p>
+        <p>{detail?.flightNumber}</p>
         <p>{travelClass}</p>
         </div>
         <div className="flex space-x-3">
@@ -37,7 +33,7 @@ export const Flight = ({startDate, endDate, hours}:props) => {
             </div>
         </div>
         <p className="text-base font-medium text-neutral-900 pt-1">{end}</p>
-        <p className="text-sm font-normal text-neutral-600">McCarran International Airport, Las Vegas</p>
+        <p className="text-sm font-normal text-neutral-600">{detail?.arrivalAirport}</p>
         </div>
         </div>
         
@@ -49,19 +45,19 @@ export const Flight = ({startDate, endDate, hours}:props) => {
 
 
 export  default function Details() {
-    const {input} = useAuth()
+    const {input, detail} = useAuth()
     const {tripType} =input
   return (
     <div className="h-full">
-  <Flight startDate="23:15" endDate="2h10" hours="1:25"/>
+  <Flight/>
   {tripType === "two-ways" && (
     <div className="h-full">
         <div className="flex justify-between items-center bg-neutral-200 py-1 px-5 rounded-2xl my-2">
-            <p className="text-sm font-normal text-neutral-900">Stop to change planes in Las Vegas</p>
-            <p className="text-sm font-medium text-neutral-900">22:55</p>
+            <p className="text-sm font-normal text-neutral-900">Stop to change planes {detail?.arrivalCity}</p>
+            <p className="text-sm font-medium text-neutral-900">{detail?.arrival}</p>
       
         </div>
-    <Flight startDate="14:30" endDate="2h10" hours="1:25"/>
+    <Flight />
     </div>
     )}
   </div>

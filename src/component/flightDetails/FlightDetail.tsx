@@ -20,7 +20,7 @@ const FlightDetail = () => {
   return (
     <div >
        {detail && show && (
-        <div className="md:w-1/3 absolute bg-white top-16 right-0 h-screen text-left">
+        <div className="absolute bg-white top-16 right-0 h-screen text-left">
         <div className="flex justify-between items-center w-full px-3 py-1">
         <p className="text-sm font-semibold">{detail.name}</p>
        <FaTimes onClick={()=>setShow(false)} className="text-sm font-thin"/>

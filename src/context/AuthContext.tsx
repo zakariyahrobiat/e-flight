@@ -83,7 +83,8 @@ handlePriceInDecreasingOrder:()=>void,
 isAscendingChecked:boolean,
   isDecreasingChecked:boolean,
   handleTransit:(type:string)=>void, 
-  selectedFilter:string
+  selectedFilter:string,
+  searchCity:()=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -108,7 +109,8 @@ export const AppContext = createContext<AppContextType>({
    isAscendingChecked:false,
     isDecreasingChecked: false,
     handleTransit:()=>{},
-    selectedFilter:""
+    selectedFilter:"",
+    searchCity:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -124,6 +126,17 @@ export const Context =(props:PropsWithChildren)=>{
   const [isDecreasingChecked, setIsDecreasingChecked] = useState(false) 
 const [filteredFlight, setFilteredFlights] = useState<flightCard[]>([]);
 const [selectedFilter, setSelectedFilter] = useState<string>("");
+const searchCity =()=>{
+ const filteredCity = filteredFlight.filter((item)=> item.departureCity === input.start && item.arrivalCity ===input.end)
+  if (filteredCity.length > 0){
+setFilteredFlights(filteredCity)
+  }
+  else{
+    setFilteredFlights(flightDetail)
+  }
+  
+}
+
 const handleTransit = (type: string) => {
   if (selectedFilter === type){
     setSelectedFilter("")
@@ -131,7 +144,7 @@ const handleTransit = (type: string) => {
   }
   else{
     setSelectedFilter(type)
-    const filteredItem = flightDetail.filter((item)=>item.stopInfo === type)
+    const filteredItem =filteredFlight.filter((item)=>item.stopInfo === type)
     setFilteredFlights(filteredItem)
   }
 
@@ -149,7 +162,7 @@ setisAscendingChecked(true)
 setIsDecreasingChecked(false)
   }
   const handlePriceInDecreasingOrder=()=>{
-const sortFlightInDecreasingOrder = [...filteredFlight].sort((a,b)=>b.price-a.price)
+const sortFlightInDecreasingOrder =[...filteredFlight].sort((a,b)=>b.price-a.price)
 setFilteredFlights(sortFlightInDecreasingOrder)
 setisAscendingChecked(false)
 setIsDecreasingChecked(true)
@@ -172,6 +185,7 @@ setCountry(sortedData)
     setProgress(progress=>(progress < 100 ? progress + 50 : 0))
   }
 const handleInputs =(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>{
+  e.preventDefault()
 const {value, name} = e.target
 setInput((input)=>({...input, [name]:value}))
 }
@@ -242,6 +256,7 @@ setInput((input)=>({...input, [name]:value}))
         isDecreasingChecked:isDecreasingChecked,
         handleTransit:handleTransit,
         filteredFlight:filteredFlight,
-        selectedFilter:selectedFilter
+        selectedFilter:selectedFilter,
+        searchCity:searchCity
    }}>{props.children}</AppContext.Provider> 
 }
