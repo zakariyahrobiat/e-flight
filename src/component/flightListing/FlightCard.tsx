@@ -14,7 +14,7 @@ const FlightCard = () => {
   </div>
 <div>
   {currentItems().map((item)=>{
-    const {id, name, time, hours, price, type, weight} = item
+    const {id, name, arrival, departure, duration, price, stops, weight} = item
     return(
      <div className="" key={id}>
       <div  className="flex py-2 w-full justify-between items-center">
@@ -23,8 +23,8 @@ const FlightCard = () => {
 <p>{weight}kg</p>
 </div>
 
-<div className="w-2/5"><p>{time}</p> <p>{hours}</p></div>
-<p className="w-1/5">{type}</p>
+<div className="w-2/5"><p>{arrival}-{departure}</p> <p>{duration}</p></div>
+<p className="w-1/5">{stops}</p>
 <p className="w-1/5 hidden md:block">{price}USD</p>
 <button className="w-1/5 hidden md:block bg-primary-600 p-1 rounded text-white" onClick={()=>handleFlightDetail(id)}>choose</button>
 <div className="w-1/5 md:hidden">

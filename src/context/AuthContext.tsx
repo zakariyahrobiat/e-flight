@@ -1,164 +1,31 @@
 import { createContext, useState, useEffect} from "react";
 import { PropsWithChildren } from "react";
-import FlightDetail from "../component/flightDetails/FlightDetail";
-import FlightCard from "../component/flightListing/FlightCard";
 
-const data =[
-   {
-     id:1,
-     name:"HorizonJet",
-   weight:25,
-     time:"10:25PM - 7:06AM",
-     hours:"10 hr 41 min",
-     price:275.5,
-     type:"direct"
-   },
-   {
-     id:2,
-     name:"Altitude Airways",
-     weight:25,
-     time:"6:30AM - 7:55AM",
-     hours:"3 hr 25 min",
-     price:296,
-     type:"1 stop"
-   },
-   {
-     id:3,
-     name:"Cloudy Airlines",
-     weight:25,
-     time:"6:30AM - 7:55AM",
-     hours:"3 hr 25 min",
-     price:236,
-     type:"2 stop"
-   }
-   ,
-   {
-     id:4,
-     name:"Altitude Airways",
-     weight:25,
-     time:"6:30AM - 7:55AM",
-     hours:"3 hr 25 min",
-     price:217,
-     type:"direct"
-   }
-   ,
-   {
-     id:5,
-     name:"Altitude Airways",
-     weight:25,
-     time:"6:30AM - 7:55AM",
-     hours:"3 hr 25 min",
-     price:256,
-     type:"1 stop"
-   }
-   ,
-   {
-     id:6,
-     name:"Altitude Airways",
-     weight:25,
-     time:"6:30AM - 7:55AM",
-     hours:"3 hr 25 min",
-     price:213,
-     type:"2 stop"
-   }
-   ,
-   {
-     id:7,
-     name:"Altitude Airways",
-     weight:25,
-     time:"6:30AM - 7:55AM",
-     hours:"3 hr 25 min",
-     price:219,
-     type:"direct"
-   }
-   ,
-   {
-     id:8,
-     name:"Altitude Airways",
-     weight:25,
-     time:"6:30AM - 7:55AM",
-     hours:"3 hr 25 min",
-     price:268,
-     type:"1 stop"
-   },
-   {
-      id:9,
-      name:"Altitude Airways",
-    weight:25,
-      time:"10:25PM - 7:06AM",
-      hours:"10 hr 41 min",
-      price:299.5,
-      type:"2 stop"
-    },
-    {
-      id:10,
-      name:"HorizonJet",
-      weight:25,
-      time:"6:30AM - 7:55AM",
-      hours:"3 hr 25 min",
-      price:276,
-      type:"direct"
-    },
-    {
-      id:11,
-      name:"HorizonJet",
-      weight:25,
-      time:"6:30AM - 7:55AM",
-      hours:"3 hr 25 min",
-      price:226,
-      type:"1 stop"
-    }
-    ,
-    {
-      id:12,
-      name:"Altitude Airways",
-      weight:25,
-      time:"6:30AM - 7:55AM",
-      hours:"3 hr 25 min",
-      price:214,
-      type:"2 stop"
-    }
-    ,
-    {
-      id:13,
-      name:"Altitude Airways",
-      weight:25,
-      time:"6:30AM - 7:55AM",
-      hours:"3 hr 25 min",
-      price:208,
-      type:"direct"
-    }
-    ,
-    {
-      id:14,
-      name:"Altitude Airways",
-      weight:25,
-      time:"6:30AM - 7:55AM",
-      hours:"3 hr 25 min",
-      price:296,
-      type:"1 stop"
-    }
-    ,
-    {
-      id:15,
-      name:"Altitude Airways",
-      weight:25,
-      time:"6:30AM - 7:55AM",
-      hours:"3 hr 25 min",
-      price:263,
-      type:"2 stop"
-    }
-    ,
-    {
-      id:16,
-      name:"Altitude Airways",
-      weight:25,
-      time:"6:30AM - 7:55AM",
-      hours:"3 hr 25 min",
-      price:272,
-      type:"direct"
-    }
-   ]
+   const data = [
+      { id: 1, name: "Naija Skies Airways", flightNumber: "NS123", departure: "10:00AM", arrival: "12:30PM", duration: "2 hr 30 min", stops: "direct", price: 150.00, weight: 25, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Abuja", arrivalAirport: "Nnamdi Azikiwe International Airport", transit: null, stopInfo: "direct" },
+      { id: 2, name: "SkyNaija Airlines", flightNumber: "SN456", departure: "12:00PM", arrival: "2:15PM", duration: "2 hr 15 min", stops: "1 stop", price: 180.00, weight: 20, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Calabar", arrivalAirport: "Margaret Ekpo International Airport", transit: "Enugu", stopInfo: "transit" },
+      { id: 3, name: "AeroNaija", flightNumber: "AN789", departure: "1:30PM", arrival: "3:45PM", duration: "2 hr 15 min", stops: "direct", price: 220.00, weight: 25, departureCity: "Abuja", departureAirport: "Nnamdi Azikiwe International Airport", arrivalCity: "Port Harcourt", arrivalAirport: "Port Harcourt International Airport", transit: null, stopInfo: "direct" },
+      { id: 4, name: "AfroWings Airlines", flightNumber: "AW101", departure: "3:00PM", arrival: "4:40PM", duration: "1 hr 40 min", stops: "direct", price: 175.00, weight: 30, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Enugu", arrivalAirport: "Akanu Ibiam International Airport", transit: null, stopInfo: "direct" },
+      { id: 5, name: "NigeriaSky Airways", flightNumber: "NS102", departure: "4:00PM", arrival: "6:10PM", duration: "2 hr 10 min", stops: "1 stop", price: 190.00, weight: 20, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Kaduna", arrivalAirport: "Kaduna International Airport", transit: "Kaduna", stopInfo: "transit" },
+      { id: 6, name: "Naija Air", flightNumber: "NA303", departure: "6:00PM", arrival: "7:30PM", duration: "1 hr 30 min", stops: "direct", price: 160.00, weight: 25, departureCity: "Abuja", departureAirport: "Nnamdi Azikiwe International Airport", arrivalCity: "Lagos", arrivalAirport: "Murtala Muhammed International Airport", transit: null, stopInfo: "direct" },
+      { id: 7, name: "JetNigeria", flightNumber: "JN404", departure: "7:00PM", arrival: "9:00PM", duration: "2 hr", stops: "direct", price: 210.00, weight: 25, departureCity: "Port Harcourt", departureAirport: "Port Harcourt International Airport", arrivalCity: "Abuja", arrivalAirport: "Nnamdi Azikiwe International Airport", transit: null, stopInfo: "direct" },
+      { id: 8, name: "LagosFlight Airways", flightNumber: "LF505", departure: "8:00AM", arrival: "9:40AM", duration: "1 hr 40 min", stops: "direct", price: 250.00, weight: 20, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Calabar", arrivalAirport: "Margaret Ekpo International Airport", transit: null, stopInfo: "direct" },
+      { id: 9, name: "Naija Skies Airways", flightNumber: "NS506", departure: "9:00AM", arrival: "11:20AM", duration: "2 hr 20 min", stops: "1 stop", price: 160.00, weight: 20, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Port Harcourt", arrivalAirport: "Port Harcourt International Airport", transit: "Enugu", stopInfo: "transit" },
+      { id: 10, name: "SkyNaija Airlines", flightNumber: "SN607", departure: "10:30AM", arrival: "12:00PM", duration: "1 hr 30 min", stops: "direct", price: 180.00, weight: 25, departureCity: "Abuja", departureAirport: "Nnamdi Azikiwe International Airport", arrivalCity: "Lagos", arrivalAirport: "Murtala Muhammed International Airport", transit: null, stopInfo: "direct" },
+      { id: 11, name: "AeroNaija", flightNumber: "AN708", departure: "11:00AM", arrival: "1:30PM", duration: "2 hr 30 min", stops: "direct", price: 200.00, weight: 25, departureCity: "Abuja", departureAirport: "Nnamdi Azikiwe International Airport", arrivalCity: "Enugu", arrivalAirport: "Akanu Ibiam International Airport", transit: null, stopInfo: "direct" },
+      { id: 12, name: "AfroWings Airlines", flightNumber: "AW809", departure: "12:00PM", arrival: "1:30PM", duration: "1 hr 30 min", stops: "direct", price: 170.00, weight: 30, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Abuja", arrivalAirport: "Nnamdi Azikiwe International Airport", transit: null, stopInfo: "direct" },
+      { id: 13, name: "NigeriaSky Airways", flightNumber: "NS910", departure: "1:30PM", arrival: "4:00PM", duration: "2 hr 30 min", stops: "2 stops", price: 240.00, weight: 25, departureCity: "Abuja", departureAirport: "Nnamdi Azikiwe International Airport", arrivalCity: "Lagos", arrivalAirport: "Murtala Muhammed International Airport", transit: "Kaduna, Calabar", stopInfo: "transit" },
+      { id: 14, name: "Naija Air", flightNumber: "NA102", departure: "2:00PM", arrival: "4:30PM", duration: "2 hr 30 min", stops: "direct", price: 190.00, weight: 25, departureCity: "Port Harcourt", departureAirport: "Port Harcourt International Airport", arrivalCity: "Lagos", arrivalAirport: "Murtala Muhammed International Airport", transit: null, stopInfo: "direct" },
+      { id: 15, name: "JetNigeria", flightNumber: "JN203", departure: "3:30PM", arrival: "5:15PM", duration: "1 hr 45 min", stops: "1 stop", price: 210.00, weight: 20, departureCity: "Abuja", departureAirport: "Nnamdi Azikiwe International Airport", arrivalCity: "Port Harcourt", arrivalAirport: "Port Harcourt International Airport", transit: "Kaduna", stopInfo: "transit" },
+      { id: 16, name: "LagosFlight Airways", flightNumber: "LF314", departure: "4:15PM", arrival: "6:45PM", duration: "2 hr 30 min", stops: "direct", price: 250.00, weight: 20, departureCity: "Calabar", departureAirport: "Margaret Ekpo International Airport", arrivalCity: "Abuja", arrivalAirport: "Nnamdi Azikiwe International Airport", transit: null, stopInfo: "direct" },
+      { id: 17, name: "Naija Skies Airways", flightNumber: "NS415", departure: "5:00PM", arrival: "7:00PM", duration: "2 hr", stops: "direct", price: 175.00, weight: 20, departureCity: "Abuja", departureAirport: "Nnamdi Azikiwe International Airport", arrivalCity: "Enugu", arrivalAirport: "Akanu Ibiam International Airport", transit: null, stopInfo: "direct" },
+      { id: 18, name: "SkyNaija Airlines", flightNumber: "SN516", departure: "6:00PM", arrival: "7:45PM", duration: "1 hr 45 min", stops: "direct", price: 180.00, weight: 25, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Kaduna", arrivalAirport: "Kaduna International Airport", transit: null, stopInfo: "direct" },
+      { id: 19, name: "AeroNaija", flightNumber: "AN617", departure: "7:00PM", arrival: "8:30PM", duration: "1 hr 30 min", stops: "direct", price: 200.00, weight: 25, departureCity: "Port Harcourt", departureAirport: "Port Harcourt International Airport", arrivalCity: "Lagos", arrivalAirport: "Murtala Muhammed International Airport", transit: null, stopInfo: "direct" },
+      { id: 20, name: "AfroWings Airlines", flightNumber: "AW718", departure: "8:00PM", arrival: "9:30PM", duration: "1 hr 30 min", stops: "1 stop", price: 170.00, weight: 30, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Enugu", arrivalAirport: "Akanu Ibiam International Airport", transit: "Abuja", stopInfo: "transit" }
+   ];
+   
+   
+ 
    interface Country{
     name:{
       common: string
@@ -177,13 +44,21 @@ const data =[
     phoneNumber: string
   }
    export interface flightCard{
-      id: number;
-      name: string;
-      weight: number;
-      time: string;
-      hours: string;
-      price: number;
-      type: string;  
+      id: number; 
+      name: string; 
+      flightNumber: string;
+       departure: string; 
+       arrival: string; 
+       duration: string; 
+       stops: string; 
+       price: number; 
+       weight: number; 
+       departureCity: string;
+        departureAirport: string;
+         arrivalCity: string; 
+         arrivalAirport: string; 
+      transit:null| string;
+      stopInfo:string ;
    }
 interface AppContextType{
 dates:Date[],
@@ -256,7 +131,7 @@ const handleTransit = (type: string) => {
   }
   else{
     setSelectedFilter(type)
-    const filteredItem = flightDetail.filter((item)=>item.type === type)
+    const filteredItem = flightDetail.filter((item)=>item.stopInfo === type)
     setFilteredFlights(filteredItem)
   }
 
@@ -268,14 +143,14 @@ useEffect(() => {
 }, []);
 
   const handlePriceInAscendingOrder =()=>{  
-const sortFlightInAscendingOrder = [...flightDetail].sort((a, b)=> a.price-b.price)
-setflightDetail(sortFlightInAscendingOrder)
+const sortFlightInAscendingOrder = [...filteredFlight].sort((a, b)=> a.price-b.price)
+setFilteredFlights(sortFlightInAscendingOrder)
 setisAscendingChecked(true)
 setIsDecreasingChecked(false)
   }
   const handlePriceInDecreasingOrder=()=>{
-const sortFlightInDecreasingOrder = [...flightDetail].sort((a,b)=>b.price-a.price)
-setflightDetail(sortFlightInDecreasingOrder)
+const sortFlightInDecreasingOrder = [...filteredFlight].sort((a,b)=>b.price-a.price)
+setFilteredFlights(sortFlightInDecreasingOrder)
 setisAscendingChecked(false)
 setIsDecreasingChecked(true)
   }
@@ -320,7 +195,7 @@ setInput((input)=>({...input, [name]:value}))
  
 
   const next = () => {
-    if ((currentPage + 1) * perPage < flightDetail.length) {
+    if ((currentPage + 1) * perPage < filteredFlight.length) {
       setCurrentPage(currentPage + 1)
     }
   };

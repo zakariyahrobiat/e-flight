@@ -37,7 +37,7 @@ const FlightSort = () => {
                     <label htmlFor="direct"className="text-sm font-normal text-neutral-900">Direct</label>
                     </div>
                     <div className="flex space-x-2 items-center">
-                    <input type="checkbox" name="transit" id="" checked={selectedFilter=== "1 stop"} onChange={()=>handleTransit("1 stop")} />
+                    <input type="checkbox" name="transit" id="" checked={selectedFilter=== "transit"} onChange={()=>handleTransit("transit")} />
                     <label htmlFor="transit" className="text-sm font-normal text-neutral-900">1 transit</label>
                     </div>
                 </div>
