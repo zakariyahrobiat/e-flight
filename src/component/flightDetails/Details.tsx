@@ -1,9 +1,13 @@
 import { useAuth } from "../../hooks/useAuth"
-
-export const Flight = () => {
+interface props{
+    startLocation:string, endLocation: string,
+    departureport:string | undefined,
+    arrivalport:string | undefined,
+}
+export const Flight = ({startLocation, endLocation, arrivalport, departureport}:props) => {
     const {input, detail} = useAuth()
 
-    const {start, travelClass, number, end} =input
+    const {travelClass, number} =input
 
   return (
     <div className="h-[42%] bg-neutral-100 px-3 py-0">
@@ -15,8 +19,8 @@ export const Flight = () => {
             </div>
             <div className="border h-full border-secondary-500"></div>
             <div>
-            <p className="text-base font-medium text-neutral-900">{start}</p>
-        <p className="text-sm font-normal text-neutral-600">{detail?.departureAirport}</p>
+            <p className="text-base font-medium text-neutral-900">{startLocation}</p>
+        <p className="text-sm font-normal text-neutral-600">{departureport}</p>
         <div className="flex items-center space-x-3 text-sm font-normal text-primary-600 pt-2 pb-1">
         <p>{detail?.flightNumber}</p>
         <p>{travelClass}</p>
@@ -32,8 +36,8 @@ export const Flight = () => {
                 <p className="text-xs text-neutral-600 font-medium">29 inches Seat pitch (standard)</p>
             </div>
         </div>
-        <p className="text-base font-medium text-neutral-900 pt-1">{end}</p>
-        <p className="text-sm font-normal text-neutral-600">{detail?.arrivalAirport}</p>
+        <p className="text-base font-medium text-neutral-900 pt-1">{endLocation}</p>
+        <p className="text-sm font-normal text-neutral-600">{arrivalport}</p>
         </div>
         </div>
         
@@ -46,10 +50,12 @@ export const Flight = () => {
 
 export  default function Details() {
     const {input, detail} = useAuth()
-    const {tripType} =input
+    const {tripType, start, end,} =input
+    
   return (
     <div className="h-full">
-  <Flight/>
+  <Flight startLocation={start} departureport={detail?.departureAirport} arrivalport={detail?.arrivalAirport}
+            endLocation={end} />
   {tripType === "two-ways" && (
     <div className="h-full">
         <div className="flex justify-between items-center bg-neutral-200 py-1 px-5 rounded-2xl my-2">
@@ -57,7 +63,8 @@ export  default function Details() {
             <p className="text-sm font-medium text-neutral-900">{detail?.arrival}</p>
       
         </div>
-    <Flight />
+    <Flight startLocation={end} 
+            endLocation={start} departureport={detail?.arrivalAirport} arrivalport={detail?.departureAirport}/>
     </div>
     )}
   </div>

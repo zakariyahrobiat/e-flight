@@ -2,6 +2,7 @@ import { useAuth } from "../../hooks/useAuth"
 import { useRef, useEffect } from "react"
 import logo from "../../assets/logo.png"
 import JsBarcode from "jsbarcode"
+
 interface BarcodeProps {
   value: string;       
   format?: string;     
@@ -9,7 +10,9 @@ interface BarcodeProps {
   height?: number;     
   displayValue?: boolean; 
   lineColor?: string;
-  fontSize?: number   
+  fontSize?: number
+  startLocation: string,
+  endLocation: string   
 }
 
 
@@ -18,8 +21,9 @@ export const FlightTicketProps = ({value,
   width = 1,
   height = 40,
   displayValue = true,
-  lineColor = "#000",
-fontSize = 8}:BarcodeProps) => {
+  lineColor = "#000", 
+fontSize = 8,
+startLocation, endLocation}:BarcodeProps) => {
     const svgRef = useRef<SVGSVGElement>(null);
     const svgRef2 = useRef<SVGSVGElement>(null);
     
@@ -60,24 +64,24 @@ fontSize = 8}:BarcodeProps) => {
         <p className="text-sm font-normal text-tertiary2-750 md:pb-2">{travelClass}</p>
         <div className="flex justify-between items-center py-1 md:py-2">
           <div>
-            <p className=" text-xl md:text-3xl text-secondary-500 font-medium">23:15</p>
-            <p className="text-xs md:text-sm font-medium text-neutral-900">{start}</p>
+            <p className=" text-xl md:text-3xl text-secondary-500 font-medium">{detail?.departure}</p>
+            <p className="text-xs md:text-sm font-medium text-neutral-900">{startLocation}</p>
             <p className="text-xs md:text-sm font-normal text-neutral-500">9 Feb, 2023</p>
           </div>
           <div>
-            <p className="text-xl md:text-3xl text-secondary-500 font-medium">1:25</p>
-            <p className="text-xs md:text-sm font-medium text-neutral-900">{end}</p>
+            <p className="text-xl md:text-3xl text-secondary-500 font-medium">{detail?.arrival}</p>
+            <p className="text-xs md:text-sm font-medium text-neutral-900">{endLocation}</p>
             <p className="text-xs md:text-sm font-normal text-neutral-500">10 Feb, 2023</p>
           </div>
         </div>
         <hr className="border-secondary-500 mx-2 md:mx-5" />
         <div className="text-center">
-        <p className="text-sm font-normal text-neutral-900 py-2">2h10m</p>
+        <p className="text-sm font-normal text-neutral-900 py-2">{detail?.duration}</p>
         </div>
         <p className="text-sm font-normal text-neutral-900">Check-in: <b>9th Feb 2023 at 21:20</b></p>
         </div>
         <div className=" flex flex-col h-full justify-between items-end text-right w-5/12">
-          <p className="rounded-xl p-1 text-xs font-normal bg-neutral-300">{number}x23kg</p>
+          <p className="rounded-xl p-1 text-xs font-normal bg-neutral-300">{number}x{detail?.weight}kg</p>
           <div className="-rotate-90 -mr-9 md:-mr-14">
         <svg ref={svgRef}></svg>
         </div>
@@ -95,7 +99,7 @@ fontSize = 8}:BarcodeProps) => {
         </div>
         <div>
           <p className="text-sm text-neutral-550 font-medium">Airline Booking Code</p>
-          <p className="text-xl md:text-2xl text-neutral-550 font-medium">CA-6018</p>
+          <p className="text-xl md:text-2xl text-neutral-550 font-medium">{detail?.flightNumber}</p>
         </div>
         <div className="flex justify-center mt-1 md:mt-5">
         <svg ref={svgRef2}></svg>
@@ -107,13 +111,13 @@ fontSize = 8}:BarcodeProps) => {
 }
 const FlightTicket =()=>{
   const {input} = useAuth()
-  const {tripType} = input
+  const {tripType, start, end} = input
   return(
     <div>
        <p className="font-semibold text-xl text-secondary-500">Your flight is booked sucessflly!</p>
        <p className="text-sm font-normal text-neutral-600">Present E-ticket and valid indentification at check-in</p>
-      <FlightTicketProps value="EFLIGHT12345" />
-      {tripType === "two-ways" && <FlightTicketProps value="EFLIGHT12345"/>}
+      <FlightTicketProps value="EFLIGHT12345" startLocation={start} endLocation={end} />
+      {tripType === "two-ways" && <FlightTicketProps value="EFLIGHT12345" startLocation={end} endLocation={start}/>}
     </div>
   )
 
