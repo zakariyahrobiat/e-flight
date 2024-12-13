@@ -145,7 +145,7 @@ const handleTransit = (type: string) => {
     setSelectedFilter("")
 
     setFilteredFlights(filteredFlightsBase)
-    
+
   }
   else{
     setSelectedFilter(type)
