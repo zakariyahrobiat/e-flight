@@ -126,13 +126,16 @@ export const Context =(props:PropsWithChildren)=>{
   const [isDecreasingChecked, setIsDecreasingChecked] = useState(false) 
 const [filteredFlight, setFilteredFlights] = useState<flightCard[]>([]);
 const [selectedFilter, setSelectedFilter] = useState<string>("");
+const [filteredFlightsBase, setfilteredFlightsBase] = useState<flightCard[]>([])
 const searchCity =()=>{
- const filteredCity = filteredFlight.filter((item)=> item.departureCity === input.start && item.arrivalCity ===input.end)
+  const startCity = input.start.toLowerCase()
+  const endCity = input.end.toLowerCase()
+ const filteredCity = filteredFlightsBase.filter((item)=> item.departureCity.toLowerCase() === startCity && item.arrivalCity.toLowerCase() ===endCity)
   if (filteredCity.length > 0){
 setFilteredFlights(filteredCity)
   }
   else{
-    setFilteredFlights(flightDetail)
+    setFilteredFlights(filteredFlightsBase)
   }
   
 }
@@ -140,12 +143,16 @@ setFilteredFlights(filteredCity)
 const handleTransit = (type: string) => {
   if (selectedFilter === type){
     setSelectedFilter("")
-    setFilteredFlights(flightDetail)
+
+    setFilteredFlights(filteredFlightsBase)
+    
   }
   else{
     setSelectedFilter(type)
-    const filteredItem =filteredFlight.filter((item)=>item.stopInfo === type)
+    const filteredItem =filteredFlightsBase.filter((item)=>item.stopInfo === type)
     setFilteredFlights(filteredItem)
+  
+    
   }
 
  
@@ -153,17 +160,21 @@ const handleTransit = (type: string) => {
 useEffect(() => {
   setflightDetail(data);
   setFilteredFlights(data);
+  setfilteredFlightsBase(data);
 }, []);
 
-  const handlePriceInAscendingOrder =()=>{  
+  const handlePriceInAscendingOrder =()=>{ 
+    
 const sortFlightInAscendingOrder = [...filteredFlight].sort((a, b)=> a.price-b.price)
 setFilteredFlights(sortFlightInAscendingOrder)
+setfilteredFlightsBase(sortFlightInAscendingOrder) 
 setisAscendingChecked(true)
 setIsDecreasingChecked(false)
   }
   const handlePriceInDecreasingOrder=()=>{
 const sortFlightInDecreasingOrder =[...filteredFlight].sort((a,b)=>b.price-a.price)
 setFilteredFlights(sortFlightInDecreasingOrder)
+setfilteredFlightsBase(sortFlightInDecreasingOrder)
 setisAscendingChecked(false)
 setIsDecreasingChecked(true)
   }
