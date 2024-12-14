@@ -45,6 +45,7 @@ const FlightSort = () => {
                 </div>
                
                     {detail && detail.transit &&(
+                        <div>
                          <div className="pt-1">
                 <p className="text-base font-semibold">Transit point</p>
                 <div className="pb-1">
@@ -55,21 +56,25 @@ const FlightSort = () => {
                    
                     <label htmlFor="pointA" className="text-sm font-normal text-neutral-900">{detail.transit.split(",")[0]}</label>
                     </div>
+                    {detail.stops === "2 stops" &&(
                     <div className="flex space-x-2 items-center">
                     <input type="checkbox" name="pointB" id="" />
                     <label htmlFor="pointB" className="text-sm font-normal text-neutral-900">{detail.transit.split(",")[1]}</label>
                     </div>
+                    )}
                 </div>
                 <hr className="w-full"/>
                 </div>
+                 <div className="pt-1">
+                 <p className="text-base font-semibold">Transit duration</p>
+                 <div>
+                     <input type="range" name="" id="" className="w-full" />
+                 </div>
+             </div>
+             </div>
                     )}
                
-                <div className="pt-1">
-                    <p className="text-base font-semibold">Transit duration</p>
-                    <div>
-                        <input type="range" name="" id="" className="w-full" />
-                    </div>
-                </div>
+               
     </div>
       )
     }
