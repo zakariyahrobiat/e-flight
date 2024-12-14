@@ -12,7 +12,8 @@ interface BarcodeProps {
   lineColor?: string;
   fontSize?: number
   startLocation: string,
-  endLocation: string   
+  endLocation: string ,
+  date: string  
 }
 
 
@@ -23,7 +24,7 @@ export const FlightTicketProps = ({value,
   displayValue = true,
   lineColor = "#000", 
 fontSize = 8,
-startLocation, endLocation}:BarcodeProps) => {
+startLocation, endLocation, date}:BarcodeProps) => {
     const svgRef = useRef<SVGSVGElement>(null);
     const svgRef2 = useRef<SVGSVGElement>(null);
     
@@ -52,7 +53,7 @@ startLocation, endLocation}:BarcodeProps) => {
   
    
   const {detail, input}= useAuth()
-  const {start, travelClass, number, end, name, surname, title} = input
+  const {travelClass, number, name, surname, title} = input
   return (
     <div className="w-full">
      
@@ -66,19 +67,19 @@ startLocation, endLocation}:BarcodeProps) => {
           <div>
             <p className=" text-xl md:text-3xl text-secondary-500 font-medium">{detail?.departure}</p>
             <p className="text-xs md:text-sm font-medium text-neutral-900">{startLocation}</p>
-            <p className="text-xs md:text-sm font-normal text-neutral-500">9 Feb, 2023</p>
+            <p className="text-xs md:text-sm font-normal text-neutral-500">{date}</p>
           </div>
           <div>
             <p className="text-xl md:text-3xl text-secondary-500 font-medium">{detail?.arrival}</p>
             <p className="text-xs md:text-sm font-medium text-neutral-900">{endLocation}</p>
-            <p className="text-xs md:text-sm font-normal text-neutral-500">10 Feb, 2023</p>
+            <p className="text-xs md:text-sm font-normal text-neutral-500">{date}</p>
           </div>
         </div>
         <hr className="border-secondary-500 mx-2 md:mx-5" />
         <div className="text-center">
         <p className="text-sm font-normal text-neutral-900 py-2">{detail?.duration}</p>
         </div>
-        <p className="text-sm font-normal text-neutral-900">Check-in: <b>9th Feb 2023 at 21:20</b></p>
+        <p className="text-sm font-normal text-neutral-900">Check-in: <b>{date} at {detail?.departure}</b></p>
         </div>
         <div className=" flex flex-col h-full justify-between items-end text-right w-5/12">
           <p className="rounded-xl p-1 text-xs font-normal bg-neutral-300">{number}x{detail?.weight}kg</p>
@@ -111,13 +112,13 @@ startLocation, endLocation}:BarcodeProps) => {
 }
 const FlightTicket =()=>{
   const {input} = useAuth()
-  const {tripType, start, end} = input
+  const {tripType, start, end, startDate, endDate} = input
   return(
     <div>
        <p className="font-semibold text-xl text-secondary-500">Your flight is booked sucessflly!</p>
        <p className="text-sm font-normal text-neutral-600">Present E-ticket and valid indentification at check-in</p>
-      <FlightTicketProps value="EFLIGHT12345" startLocation={start} endLocation={end} />
-      {tripType === "two-ways" && <FlightTicketProps value="EFLIGHT12345" startLocation={end} endLocation={start}/>}
+      <FlightTicketProps value="EFLIGHT12345" startLocation={start} endLocation={end} date={startDate} />
+      {tripType === "two-ways" && <FlightTicketProps value="EFLIGHT12345" startLocation={end} endLocation={start} date={endDate}/>}
     </div>
   )
 

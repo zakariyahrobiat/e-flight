@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { FaCalendarAlt, FaSearch } from 'react-icons/fa';
 import { useAuth } from '../../hooks/useAuth';
 const FlightFilter = () => {
-    const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+    
   const [showInputs, setShowInputs] = useState(false);
   const {input, handleInputs, searchCity}= useAuth()
 
@@ -37,7 +36,7 @@ const FlightFilter = () => {
 
       
         <span className="text-gray-700">
-          {startDate && endDate ? `${startDate} - ${endDate}` : 'Select date'}
+          {input.startDate && input.endDate ? `${input.startDate} - ${input.endDate}` : 'Select date'}
         </span>
       </div>
 
@@ -48,8 +47,9 @@ const FlightFilter = () => {
             <input
               type="date"
               id="start-date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              name="startDate"
+              value={input.startDate}
+              onChange={handleInputs}
               className="border rounded px-3 py-1"
             />
           </div>
@@ -58,8 +58,9 @@ const FlightFilter = () => {
             <input
               type="date"
               id="end-date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              name='endDate'
+              value={input.endDate}
+              onChange={handleInputs}
               className="border rounded px-3 py-1"
             />
           </div>

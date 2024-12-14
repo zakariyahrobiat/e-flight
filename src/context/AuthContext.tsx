@@ -41,7 +41,9 @@ import { PropsWithChildren } from "react";
     surname: string,
     title: string,
     email: string,
-    phoneNumber: string
+    phoneNumber: string,
+    startDate:"",
+    endDate:""
   }
    export interface flightCard{
       id: number; 
@@ -97,7 +99,7 @@ export const AppContext = createContext<AppContextType>({
    handleFlightDetail:()=>{},
    show:false,
    setShow:()=>{},
-    input:{start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:""}, 
+    input:{start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"",startDate:"", endDate:""}, 
    handleInputs:()=>{},
    progress:0,
    updateProgress:()=>{},
@@ -118,7 +120,7 @@ export const Context =(props:PropsWithChildren)=>{
   const [currentPage, setCurrentPage]= useState(0)
   const [detail, setDetail]= useState<flightCard | null>(null)
   const [show, setShow] = useState(false)
-  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"" })
+  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"", startDate:"", endDate:""})
   const [progress, setProgress]= useState(0)
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
