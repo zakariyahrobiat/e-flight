@@ -127,57 +127,61 @@ export const Context =(props:PropsWithChildren)=>{
 const [filteredFlight, setFilteredFlights] = useState<flightCard[]>([]);
 const [selectedFilter, setSelectedFilter] = useState<string>("");
 const [filteredFlightsBase, setfilteredFlightsBase] = useState<flightCard[]>([])
+const [currentFlightTransit, setCurrentTransit] = useState<flightCard[]>([])
 const searchCity =()=>{
   const startCity = input.start.toLowerCase()
   const endCity = input.end.toLowerCase()
- const filteredCity = filteredFlightsBase.filter((item)=> item.departureCity.toLowerCase() === startCity && item.arrivalCity.toLowerCase() ===endCity)
-  if (filteredCity.length > 0){
-setFilteredFlights(filteredCity)
-  }
-  else{
-    setFilteredFlights(filteredFlightsBase)
-  }
+ let filteredCity = filteredFlightsBase.filter((item)=> item.departureCity.toLowerCase() === startCity && item.arrivalCity.toLowerCase() ===endCity)
+ if (filteredCity.length === 0) {
+  filteredCity = filteredFlightsBase;
+}else if (selectedFilter) {
+  filteredCity = filteredCity.filter((item) => item.stopInfo === selectedFilter);
+setFilteredFlights(filteredCity);
+setCurrentTransit(filteredCity);
+}
   
 }
 
 const handleTransit = (type: string) => {
-  if (selectedFilter === type){
-    setSelectedFilter("")
-
-    setFilteredFlights(filteredFlightsBase)
-
-  }
-  else{
-    setSelectedFilter(type)
-    const filteredItem =filteredFlightsBase.filter((item)=>item.stopInfo === type)
-    setFilteredFlights(filteredItem)
-  
+  if (selectedFilter === type) {
+   
+    setSelectedFilter("");
+  } else {
     
+    setSelectedFilter((prev) => (prev === type ? "" : type));
+    const filteredItem =currentFlightTransit.filter((item)=>item.stopInfo === type)
+        setFilteredFlights(filteredItem)
   }
 
  
 };
 useEffect(() => {
+  searchCity();
+}, [selectedFilter]);
+
+useEffect(() => {
   setflightDetail(data);
   setFilteredFlights(data);
   setfilteredFlightsBase(data);
+  setCurrentTransit(data)
 }, []);
 
-  const handlePriceInAscendingOrder =()=>{ 
-    
-const sortFlightInAscendingOrder = [...filteredFlight].sort((a, b)=> a.price-b.price)
-setFilteredFlights(sortFlightInAscendingOrder)
-setfilteredFlightsBase(sortFlightInAscendingOrder) 
-setisAscendingChecked(true)
-setIsDecreasingChecked(false)
-  }
-  const handlePriceInDecreasingOrder=()=>{
-const sortFlightInDecreasingOrder =[...filteredFlight].sort((a,b)=>b.price-a.price)
-setFilteredFlights(sortFlightInDecreasingOrder)
-setfilteredFlightsBase(sortFlightInDecreasingOrder)
-setisAscendingChecked(false)
-setIsDecreasingChecked(true)
-  }
+  const handlePriceInAscendingOrder = () => { 
+    const sortFlightInAscendingOrder = [...filteredFlight].sort((a, b) => a.price - b.price);
+    setFilteredFlights(sortFlightInAscendingOrder);
+    setfilteredFlightsBase(sortFlightInAscendingOrder);
+    setisAscendingChecked(true);
+    setIsDecreasingChecked(false);
+  };
+  
+  const handlePriceInDecreasingOrder = () => { 
+    const sortFlightInDescendingOrder = [...filteredFlight].sort((a, b) => b.price - a.price);
+    setFilteredFlights(sortFlightInDescendingOrder);
+    setfilteredFlightsBase(sortFlightInDescendingOrder);
+    setisAscendingChecked(false);
+    setIsDecreasingChecked(true);
+  };
+  
 const fetchApi = async()=>{
 const url="https://restcountries.com/v3.1/all"
 const fetchUrl = await fetch(url) 
