@@ -43,7 +43,8 @@ import { PropsWithChildren } from "react";
     email: string,
     phoneNumber: string,
     startDate:"",
-    endDate:""
+    endDate:"",
+    password:""
   }
    export interface flightCard{
       id: number; 
@@ -99,7 +100,7 @@ export const AppContext = createContext<AppContextType>({
    handleFlightDetail:()=>{},
    show:false,
    setShow:()=>{},
-    input:{start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"",startDate:"", endDate:""}, 
+    input:{start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"",startDate:"", endDate:"", password:""}, 
    handleInputs:()=>{},
    progress:0,
    updateProgress:()=>{},
@@ -120,7 +121,7 @@ export const Context =(props:PropsWithChildren)=>{
   const [currentPage, setCurrentPage]= useState(0)
   const [detail, setDetail]= useState<flightCard | null>(null)
   const [show, setShow] = useState(false)
-  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"", startDate:"", endDate:""})
+  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"", startDate:"", endDate:"", password:""})
   const [progress, setProgress]= useState(0)
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
@@ -130,6 +131,20 @@ const [filteredFlight, setFilteredFlights] = useState<flightCard[]>([]);
 const [selectedFilter, setSelectedFilter] = useState<string>("");
 const [filteredFlightsBase, setfilteredFlightsBase] = useState<flightCard[]>([])
 const [currentFlightTransit, setCurrentTransit] = useState<flightCard[]>([])
+const [token, setToken] = useState<string | null>(null)
+const setAuthStatus=()=>{
+  if (token){
+  localStorage.setItem("token",token)
+  }
+}
+const checkAuthStatus=()=>{
+const checkToken =  localStorage.getItem("token")
+setToken(checkToken !== null ? checkToken : "")
+}
+useEffect(()=>{
+  setAuthStatus()
+  checkAuthStatus()
+},[token])
 const searchCity =()=>{
   const startCity = input.start.toLowerCase()
   const endCity = input.end.toLowerCase()
@@ -172,6 +187,7 @@ useEffect(() => {
     const sortFlightInAscendingOrder = [...filteredFlight].sort((a, b) => a.price - b.price);
     setFilteredFlights(sortFlightInAscendingOrder);
     setfilteredFlightsBase(sortFlightInAscendingOrder);
+    setCurrentTransit(sortFlightInAscendingOrder)
     setisAscendingChecked(true);
     setIsDecreasingChecked(false);
   };
@@ -180,6 +196,7 @@ useEffect(() => {
     const sortFlightInDescendingOrder = [...filteredFlight].sort((a, b) => b.price - a.price);
     setFilteredFlights(sortFlightInDescendingOrder);
     setfilteredFlightsBase(sortFlightInDescendingOrder);
+    setCurrentTransit(sortFlightInDescendingOrder)
     setisAscendingChecked(false);
     setIsDecreasingChecked(true);
   };
