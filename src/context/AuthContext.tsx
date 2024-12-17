@@ -87,7 +87,11 @@ isAscendingChecked:boolean,
   isDecreasingChecked:boolean,
   handleTransit:(type:string)=>void, 
   selectedFilter:string,
-  searchCity:()=>void
+  searchCity:()=>void,
+  token:null|string,
+  setToken:(token:null|string)=>void
+  isAuthenticated: boolean,
+  setIsAuthenticated:(isAuthenticated:boolean)=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -113,7 +117,11 @@ export const AppContext = createContext<AppContextType>({
     isDecreasingChecked: false,
     handleTransit:()=>{},
     selectedFilter:"",
-    searchCity:()=>{}
+    searchCity:()=>{},
+    token:null,
+    setToken:()=>{},
+    isAuthenticated:false,
+     setIsAuthenticated:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -132,6 +140,7 @@ const [selectedFilter, setSelectedFilter] = useState<string>("");
 const [filteredFlightsBase, setfilteredFlightsBase] = useState<flightCard[]>([])
 const [currentFlightTransit, setCurrentTransit] = useState<flightCard[]>([])
 const [token, setToken] = useState<string | null>(null)
+const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 const setAuthStatus=()=>{
   if (token){
   localStorage.setItem("token",token)
@@ -139,6 +148,7 @@ const setAuthStatus=()=>{
 }
 const checkAuthStatus=()=>{
 const checkToken =  localStorage.getItem("token")
+setIsAuthenticated(!!checkToken)
 setToken(checkToken !== null ? checkToken : "")
 }
 useEffect(()=>{
@@ -291,6 +301,10 @@ setInput((input)=>({...input, [name]:value}))
         handleTransit:handleTransit,
         filteredFlight:filteredFlight,
         selectedFilter:selectedFilter,
-        searchCity:searchCity
+        searchCity:searchCity,
+         token:token,
+         setToken:setToken,
+         isAuthenticated:isAuthenticated,
+         setIsAuthenticated:setIsAuthenticated
    }}>{props.children}</AppContext.Provider> 
 }

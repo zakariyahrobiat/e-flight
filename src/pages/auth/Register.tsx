@@ -9,7 +9,7 @@ import { useAuth } from "../../hooks/useAuth"
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {input}= useAuth()
+  const {input, setIsAuthenticated}= useAuth()
     const {email, password }= input
   
   const handleRegister =async(e:React.FormEvent)=>{
@@ -22,7 +22,10 @@ const Register = () => {
 try{
 const user = await registerUser({email, password})
 console.log("User registered:", user);
-return user
+if (user){
+  setIsAuthenticated(true)
+}
+
   }
   catch(error){
     console.error(error)

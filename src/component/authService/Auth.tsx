@@ -25,11 +25,16 @@ return userId
 
 export const LoginUser = async({email,password}:props)=>{
    try{
+    
   const signInUser = await signInWithEmailAndPassword(auth, email, password)
+  const token = await signInUser.user.getIdToken()
+  if(token){
+    console.log("Token retrieved:", token);
   return signInUser 
+  }
    }
   catch(error) {
-    console.error(error);
+    console.error("Failed to retrieve token");
     throw error;
     };
 }
