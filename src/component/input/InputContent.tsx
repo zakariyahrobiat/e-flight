@@ -7,15 +7,16 @@ interface props{
    option: string,
    discription: string,
    link: string, 
-   text:string
+   text:string,
+   onClick:()=>void
 }
-const InputContent = ({heading, button, option, discription, link, text}:props) => {
+const InputContent = ({heading, button, option, discription, link, text, onClick}:props) => {
   const {input, handleInputs} = useAuth()
   return (
     <div>
         <h1 className="text-2xl font-bold">{heading}</h1>
        
-        <button className="bg-white border border-primary-500 px-3 py-3 my-3 w-full rounded text-primary-500 text-2xl font-medium">{option}</button>
+        <button onClick={onClick} className="bg-white border border-primary-500 px-3 py-3 my-3 w-full rounded text-primary-500 text-2xl font-medium">{option}</button>
         <div className="flex justify-between items-center my-3">
     <hr className="w-full" />
     <p>or</p>

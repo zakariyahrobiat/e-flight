@@ -4,6 +4,7 @@ import FlightsPage from '../pages/flights/FlightsPage'
 import Register from '../pages/auth/Register'
 import Login from '../pages/auth/Login'
 import BookingPage from '../pages/booking/BookingPage'
+import ProtectedRoute from './ProtectedRoute'
 const Routes = createBrowserRouter([
     {
         path:"/",
@@ -11,7 +12,12 @@ const Routes = createBrowserRouter([
     },
     {
         path:"/flights",
-        element:<FlightsPage/>
+        element:(
+            <ProtectedRoute>
+                 <FlightsPage/>
+                </ProtectedRoute>
+        )
+       
     }, 
     {
         path:"/register",

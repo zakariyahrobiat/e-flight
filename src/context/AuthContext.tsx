@@ -74,7 +74,8 @@ detail: flightCard | null
 handleFlightDetail:(id:number)=> void
 show: boolean,
 setShow:(show:boolean)=>void
-input: inputFields
+input: inputFields,
+setInput:(input:inputFields)=>void,
 handleInputs:(e:React.ChangeEvent<HTMLInputElement| HTMLSelectElement>)=>void,
 progress:number,
 updateProgress:()=>void,
@@ -105,6 +106,7 @@ export const AppContext = createContext<AppContextType>({
    show:false,
    setShow:()=>{},
     input:{start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"",startDate:"", endDate:"", password:""}, 
+    setInput:()=>{},
    handleInputs:()=>{},
    progress:0,
    updateProgress:()=>{},
@@ -305,6 +307,7 @@ setInput((input)=>({...input, [name]:value}))
          token:token,
          setToken:setToken,
          isAuthenticated:isAuthenticated,
-         setIsAuthenticated:setIsAuthenticated
+         setIsAuthenticated:setIsAuthenticated,
+         setInput:setInput,
    }}>{props.children}</AppContext.Provider> 
 }

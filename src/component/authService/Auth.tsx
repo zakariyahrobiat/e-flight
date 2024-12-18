@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider,signInWithPopup } from "firebase/auth";
 import { auth } from "../../fireBase";
 
 interface props{
@@ -39,3 +39,16 @@ export const LoginUser = async({email,password}:props)=>{
     };
 }
 
+
+ const provider = new GoogleAuthProvider();
+
+export const GoggleUser= async()=>{
+  try{
+const signInWithGoogle = await signInWithPopup(auth, provider)
+const user = signInWithGoogle.user
+return user
+}
+catch(error) {
+console.error(error)
+  }
+}

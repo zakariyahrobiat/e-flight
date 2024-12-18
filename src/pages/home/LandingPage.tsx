@@ -11,7 +11,7 @@ const LandingPage = () => {
     <BackgroundLayout>
         <NavBar/>
         <img src={dashboard} alt="" srcSet="" className="mt-16" />
-      <Link to="/flights"> <button className="bg-secondary-500 text-white mt-5 font-bold px-5 py-3 rounded-xl">Get Stared</button></Link>
+      <Link to="/register"> <button className="bg-secondary-500 text-white mt-5 font-bold px-5 py-3 rounded-xl">Get Stared</button></Link>
       <div className="py-10">
       <h1 className="text-3xl font-bold text-neutral-900" >What's new?</h1>
       <div className="grid grid-cols-3 gap-5 p-5 text-left">
