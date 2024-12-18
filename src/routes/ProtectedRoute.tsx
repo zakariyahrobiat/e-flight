@@ -1,12 +1,12 @@
 import { PropsWithChildren } from "react"
 import { useAuth } from "../hooks/useAuth"
 import { Navigate } from "react-router-dom"
-const ProtectedRoute = (props:PropsWithChildren) => {
+const ProtectedRoute = ({children}:PropsWithChildren) => {
     const {isAuthenticated}= useAuth()
-    if(isAuthenticated=== false){
-        return <Navigate to="/"></Navigate>
+    if(!isAuthenticated){
+        return <Navigate to="/login" replace/>
     }
-  return <>{props.children}</>
+  return <>{children}</>
 }
 
 export default ProtectedRoute

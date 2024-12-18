@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect} from "react";
 import { PropsWithChildren } from "react";
+import { registerUser, loginUser } from "../component/authService/Auth";
 
    const data = [
       { id: 1, name: "Naija Skies Airways", flightNumber: "NS123", departure: "10:00AM", arrival: "12:30PM", duration: "2 hr 30 min", stops: "direct", price: 150.00, weight: 25, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Abuja", arrivalAirport: "Nnamdi Azikiwe International Airport", transit: null, stopInfo: "direct" },
@@ -90,9 +91,11 @@ isAscendingChecked:boolean,
   selectedFilter:string,
   searchCity:()=>void,
   token:null|string,
-  setToken:(token:null|string)=>void
+  setAuthStatus:(token:string)=>void
   isAuthenticated: boolean,
   setIsAuthenticated:(isAuthenticated:boolean)=>void
+  login:(email: string, password: string)=>void,
+  register:(email: string, password: string)=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -121,9 +124,11 @@ export const AppContext = createContext<AppContextType>({
     selectedFilter:"",
     searchCity:()=>{},
     token:null,
-    setToken:()=>{},
+    setAuthStatus:()=>{},
     isAuthenticated:false,
-     setIsAuthenticated:()=>{}
+     setIsAuthenticated:()=>{},
+     login:()=>{},
+     register:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -141,22 +146,45 @@ const [filteredFlight, setFilteredFlights] = useState<flightCard[]>([]);
 const [selectedFilter, setSelectedFilter] = useState<string>("");
 const [filteredFlightsBase, setfilteredFlightsBase] = useState<flightCard[]>([])
 const [currentFlightTransit, setCurrentTransit] = useState<flightCard[]>([])
-const [token, setToken] = useState<string | null>(null)
-const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
-const setAuthStatus=()=>{
-  if (token){
+const [token, setToken] = useState<string | null>(localStorage.getItem("token"))
+const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token)
+const setAuthStatus=(token:string)=>{
   localStorage.setItem("token",token)
+  setToken(token)
+  setIsAuthenticated(true) 
+}
+const login = async (email: string, password: string) => {
+  try {
+    const token = await loginUser({ email, password });
+    if (token) {
+      setAuthStatus(token);
+    }
+  } catch (error) {
+    console.error("Login failed", error);
   }
-}
-const checkAuthStatus=()=>{
-const checkToken =  localStorage.getItem("token")
-setIsAuthenticated(!!checkToken)
-setToken(checkToken !== null ? checkToken : "")
-}
-useEffect(()=>{
-  setAuthStatus()
-  checkAuthStatus()
-},[token])
+};
+
+// Handle register
+const register = async (email: string, password: string) => {
+  try {
+    await registerUser({ email, password });
+    // Optionally log the user in automatically after registration
+    await login(email, password);
+  } catch (error) {
+    console.error("Registration failed", error);
+  }
+};
+
+
+useEffect(() => {
+  // Check if the token exists when the app loads
+  if (token) {
+    setIsAuthenticated(true);
+  } else {
+    setIsAuthenticated(false);
+  }
+}, [token])
+
 const searchCity =()=>{
   const startCity = input.start.toLowerCase()
   const endCity = input.end.toLowerCase()
@@ -305,9 +333,11 @@ setInput((input)=>({...input, [name]:value}))
         selectedFilter:selectedFilter,
         searchCity:searchCity,
          token:token,
-         setToken:setToken,
+         setAuthStatus:setAuthStatus,
          isAuthenticated:isAuthenticated,
          setIsAuthenticated:setIsAuthenticated,
          setInput:setInput,
+         login:login,
+         register:register
    }}>{props.children}</AppContext.Provider> 
 }

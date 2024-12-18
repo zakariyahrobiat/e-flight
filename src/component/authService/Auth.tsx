@@ -23,14 +23,14 @@ return userId
 }
 
 
-export const LoginUser = async({email,password}:props)=>{
+export const loginUser = async({email,password}:props)=>{
    try{
     
   const signInUser = await signInWithEmailAndPassword(auth, email, password)
   const token = await signInUser.user.getIdToken()
   if(token){
     console.log("Token retrieved:", token);
-  return signInUser 
+  return token 
   }
    }
   catch(error) {
@@ -42,11 +42,13 @@ export const LoginUser = async({email,password}:props)=>{
 
  const provider = new GoogleAuthProvider();
 
-export const GoogleUser= async()=>{
+export const googleUser= async()=>{
   try{
 const signInWithGoogle = await signInWithPopup(auth, provider)
 const user = signInWithGoogle.user
-return user
+const token = await user.getIdToken();
+return { user, token };
+
 }
 catch(error) {
 console.error(error)
