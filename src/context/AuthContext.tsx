@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect} from "react";
 import { PropsWithChildren } from "react";
-
+import { GoogleUser } from "../component/authService/Auth";
+import { useNavigate } from "react-router-dom";
    const data = [
       { id: 1, name: "Naija Skies Airways", flightNumber: "NS123", departure: "10:00AM", arrival: "12:30PM", duration: "2 hr 30 min", stops: "direct", price: 150.00, weight: 25, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Abuja", arrivalAirport: "Nnamdi Azikiwe International Airport", transit: null, stopInfo: "direct" },
       { id: 2, name: "SkyNaija Airlines", flightNumber: "SN456", departure: "12:00PM", arrival: "2:15PM", duration: "2 hr 15 min", stops: "1 stop", price: 180.00, weight: 20, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Calabar", arrivalAirport: "Margaret Ekpo International Airport", transit: "Enugu", stopInfo: "transit" },
@@ -92,7 +93,8 @@ isAscendingChecked:boolean,
   token:null|string,
   setToken:(token:null|string)=>void
   isAuthenticated: boolean,
-  setIsAuthenticated:(isAuthenticated:boolean)=>void
+  setIsAuthenticated:(isAuthenticated:boolean)=>void, 
+  handleGoogleAuth:()=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -123,9 +125,11 @@ export const AppContext = createContext<AppContextType>({
     token:null,
     setToken:()=>{},
     isAuthenticated:false,
-     setIsAuthenticated:()=>{}
+     setIsAuthenticated:()=>{}, 
+     handleGoogleAuth:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
+  const Navigate = useNavigate()
    const [dates, setDate] = useState <Date[]>([])
    const [flightDetail, setflightDetail] = useState <flightCard[]>([])
   const [currentPage, setCurrentPage]= useState(0)
@@ -143,6 +147,13 @@ const [filteredFlightsBase, setfilteredFlightsBase] = useState<flightCard[]>([])
 const [currentFlightTransit, setCurrentTransit] = useState<flightCard[]>([])
 const [token, setToken] = useState<string | null>(null)
 const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+const handleGoogleAuth= async()=>{
+  const user = await GoogleUser()
+  if (user){
+    setIsAuthenticated(true)
+    Navigate("/flights")
+  }
+    }
 const setAuthStatus=()=>{
   if (token){
   localStorage.setItem("token",token)
@@ -309,5 +320,6 @@ setInput((input)=>({...input, [name]:value}))
          isAuthenticated:isAuthenticated,
          setIsAuthenticated:setIsAuthenticated,
          setInput:setInput,
+         handleGoogleAuth:handleGoogleAuth
    }}>{props.children}</AppContext.Provider> 
 }

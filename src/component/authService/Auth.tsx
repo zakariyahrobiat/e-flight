@@ -42,7 +42,7 @@ export const LoginUser = async({email,password}:props)=>{
 
  const provider = new GoogleAuthProvider();
 
-export const GoggleUser= async()=>{
+export const GoogleUser= async()=>{
   try{
 const signInWithGoogle = await signInWithPopup(auth, provider)
 const user = signInWithGoogle.user
