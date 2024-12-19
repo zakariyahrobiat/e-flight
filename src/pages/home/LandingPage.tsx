@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import image from "../../assets/image.jpg"
 import image1 from "../../assets/image1.jpg"
 import image2 from "../../assets/image2.jpg"
+import { FaArrowRight } from "react-icons/fa6"
 const LandingPage = () => {
   return (
     <BackgroundLayout>
@@ -17,10 +18,16 @@ const LandingPage = () => {
         <Link to="/register"><button className="bg-primary-700 py-3 text-white font-bold text-xl px-5 rounded-xl">Explore Now</button></Link>
         </div>
        </div>
+       <div>
+        <div className="flex justify-between items-center bg-neutral-150 m-10 p-5">
+          <h1>Find your next adventure with these flight deals</h1>
+          <span className="flex justify-center items-center"><h1>All</h1><FaArrowRight/></span>
+        </div>
+       </div>
       
       <div className="py-5">
       <h1 className="text-3xl font-bold text-neutral-900" >What's new?</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-5 p-5 text-left">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5 text-left">
       
         <div >
           <img src={image} alt="" srcSet="" />

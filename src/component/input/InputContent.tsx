@@ -8,7 +8,7 @@ interface props{
    discription: string,
    link: string, 
    text:string,
-   onClick:()=>void
+   onClick:()=>void,
 }
 const InputContent = ({heading, button, option, discription, link, text, onClick}:props) => {
   const {input, handleInputs} = useAuth()
