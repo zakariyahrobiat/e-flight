@@ -16,7 +16,7 @@ const InputContent = ({heading, button, option, discription, link, text, onClick
     <div>
         <h1 className="text-2xl font-bold">{heading}</h1>
        
-        <button onClick={onClick} className="bg-white border border-primary-500 px-3 py-3 my-3 w-full rounded text-primary-500 text-2xl font-medium">{option}</button>
+        <button onClick={onClick} className="bg-white border border-blue-900 px-3 py-3 my-3 w-full rounded text-blue-900 text-2xl font-medium">{option}</button>
         <div className="flex justify-between items-center my-3">
     <hr className="w-full" />
     <p>or</p>
@@ -24,11 +24,11 @@ const InputContent = ({heading, button, option, discription, link, text, onClick
 </div>
 <CustomInput label="Username" placeholder="Mark" name="email" value={input.email} onChange={handleInputs}/>
 <CustomInput label="Password" type="password" placeholder="********" name="password" value={input.password} onChange={handleInputs}/>
-<button className="bg-primary-500 px-3 py-1 rounded text-white text-base font-bold">{button}</button>
+<button className="bg-primary-700 px-3 py-1 rounded text-white text-base font-bold">{button}</button>
 
 
 <div className="text-left pt-5">
-<p>{discription} <Link to={link}><span className="text-primary-600 underline text-base font-semibold">{text}</span></Link> </p>
+<p>{discription} <Link to={link}><span className="text-primary-700 underline text-base font-semibold">{text}</span></Link> </p>
 </div>
     </div>
   )

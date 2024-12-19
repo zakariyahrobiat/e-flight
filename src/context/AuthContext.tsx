@@ -43,9 +43,9 @@ import { registerUser, loginUser } from "../component/authService/Auth";
     title: string,
     email: string,
     phoneNumber: string,
-    startDate:"",
-    endDate:"",
-    password:""
+    startDate:string,
+    endDate:string,
+    password:string,
   }
    export interface flightCard{
       id: number; 

@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/useAuth"
 const FlightSort = () => {
     const {handlePriceInAscendingOrder, handlePriceInDecreasingOrder, isAscendingChecked, isDecreasingChecked, handleTransit, selectedFilter, detail} = useAuth()
     return (
-        <div className="w-1/4 text-left hidden md:block">
+        <div className="w-1/4 text-left hidden md:block ">
      
             <div className="flex justify-start items-center w-full space-x-1 pb-1">
                 <img src={sort} alt="" srcSet="" className="w-5" />

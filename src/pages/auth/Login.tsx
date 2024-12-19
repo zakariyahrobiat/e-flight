@@ -43,7 +43,7 @@ navigate("/flights")
   return (
     <BackgroundLayout>
       <NavBar/>
-      <div className="mt-20 mx-5 md:w-1/2 md:mx-auto bg-neutral-150 shadow-3xl rounded p-5">
+      <div className="mt-24 mx-5 md:w-1/2 md:mx-auto bg-neutral-150 shadow-3xl rounded p-5">
       <form onSubmit={handleLogin}>
       <InputContent heading="Sign in" button="Sign in" option="Login with your Google Account" discription="Need an account?" link="/register" text="Sign up here" onClick={handleGoogleLogin}/>
       </form>

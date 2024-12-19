@@ -9,13 +9,13 @@ const FlightFilter = () => {
   const toggleInputs = () => setShowInputs(!showInputs);
   return (
     <div className="w-full">
-    <div className=" flex justify-start items-center space-x-3 pb-2">
-        <select name="tripType" id="" value={input.tripType} onChange={handleInputs} className="bg-neutral-200 rounded-2xl text-sm font-normal p-1">
+    <div className=" flex justify-start items-center space-x-3 pb-2 ">
+        <select name="tripType" id="" value={input.tripType} onChange={handleInputs} className="bg-transparent border-2 border-blue-900 rounded-md text-sm font-normal p-1 w-1/5">
             <option value="one-way">One way</option>
             <option value="two-ways">two ways</option>
         </select>
-        <input type="number" name="number" placeholder="1" id="" value={input.number} onChange={handleInputs}  className="bg-neutral-200 rounded-2xl text-sm font-normal p-1 w-10"/>
-        <select name="travelClass" id="" value={input.travelClass} onChange={handleInputs} className="bg-neutral-200 rounded-2xl text-sm font-normal p-1">
+        <input type="number" name="number" placeholder="1" id="" value={input.number} onChange={handleInputs}  className="bg-transparent border-2 border-blue-900 rounded-md w-1/5 text-sm font-normal p-1"/>
+        <select name="travelClass" id="" value={input.travelClass} onChange={handleInputs} className="bg-transparent border-2 border-blue-900 rounded-md w-1/5 text-sm font-normal p-1">
             <option value="Economy">Economy</option>
             <option value="Business">Business</option>
             <option value="First-class">First class</option>
