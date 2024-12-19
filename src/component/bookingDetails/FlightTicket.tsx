@@ -1,6 +1,6 @@
 import { useAuth } from "../../hooks/useAuth"
 import { useRef, useEffect } from "react"
-import logo from "../../assets/logo.png"
+
 import JsBarcode from "jsbarcode"
 
 interface BarcodeProps {
