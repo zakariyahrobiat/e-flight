@@ -1,13 +1,16 @@
 import NavBar from "../../component/NavBar"
 import Footer from "../../component/Footer"
 import BackgroundLayout from "../../Layout/BackgroundLayout"
-import dashboard from "../../assets/dashboard.png"
+
 import FlightListing from "../../component/flightListing/FlightListing"
 const FlightsPage = () => {
   return (
     <BackgroundLayout>
         <NavBar/>
-        <img src={dashboard} alt="" srcSet="" className="mt-16" />
+        <div className="hero-bg h-96 mt-16">
+        <h1>Let's Discover your destination</h1>
+        <p>We help you find flights easily and efficiently, we provide various flight recommendations that match what you want.</p>
+       </div>
        <FlightListing/>
         <Footer/>
     </BackgroundLayout>

@@ -1,6 +1,6 @@
 import NavBar from "../../component/NavBar"
 import BackgroundLayout from "../../Layout/BackgroundLayout"
-import dashboard from "../../assets/dashboard.png"
+// import hero from "../../assets/hero.png"
 import Footer from "../../component/Footer"
 import { Link } from "react-router-dom"
 import image from "../../assets/image.jpg"
@@ -10,11 +10,17 @@ const LandingPage = () => {
   return (
     <BackgroundLayout>
         <NavBar/>
-        <img src={dashboard} alt="" srcSet="" className="mt-16" />
-      <Link to="/register"> <button className="bg-secondary-500 text-white mt-5 font-bold px-5 py-3 rounded-xl">Get Stared</button></Link>
-      <div className="py-10">
+       <div className="hero-bg h-96 mt-16 md:mt-20 flex justify-between items-center gap-10">
+        <div className="w-full text-center md:w-1/2 md:text-left px-5 md:px-10">
+        <h1 className="text-4xl md:text-6xl font-bold text-blue-900">Book Your Flight Ticket in Just a Few Clicks</h1>
+        <p className="text-xl py-5 text-primary-600 font-medium">We make booking your flight simple and fast, offering a wide range of options tailored to your preferences. Find the perfect flight with ease and efficiency.</p>
+        <Link to="/register"><button className="bg-primary-700 py-3 text-white font-bold text-xl px-5 rounded-xl">Explore Now</button></Link>
+        </div>
+       </div>
+      
+      <div className="py-5">
       <h1 className="text-3xl font-bold text-neutral-900" >What's new?</h1>
-      <div className="grid grid-cols-3 gap-5 p-5 text-left">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-5 p-5 text-left">
       
         <div >
           <img src={image} alt="" srcSet="" />
