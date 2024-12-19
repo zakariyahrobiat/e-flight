@@ -191,23 +191,23 @@ const searchCity =()=>{
  let filteredCity = filteredFlightsBase.filter((item)=> item.departureCity.toLowerCase() === startCity && item.arrivalCity.toLowerCase() ===endCity)
  if (filteredCity.length === 0) {
   filteredCity = filteredFlightsBase;
-}else if (selectedFilter) {
+}
+if (selectedFilter) {
   filteredCity = filteredCity.filter((item) => item.stopInfo === selectedFilter);
+}
 setFilteredFlights(filteredCity);
 setCurrentTransit(filteredCity);
 }
   
-}
+
 
 const handleTransit = (type: string) => {
   if (selectedFilter === type) {
    
     setSelectedFilter("");
   } else {
-    
-    setSelectedFilter((prev) => (prev === type ? "" : type));
-    const filteredItem =currentFlightTransit.filter((item)=>item.stopInfo === type)
-        setFilteredFlights(filteredItem)
+    setSelectedFilter(type)
+  
   }
 
  
@@ -221,7 +221,7 @@ useEffect(() => {
   setFilteredFlights(data);
   setfilteredFlightsBase(data);
   setCurrentTransit(data)
-}, []);
+}, [data]);
 
   const handlePriceInAscendingOrder = () => { 
     const sortFlightInAscendingOrder = [...filteredFlight].sort((a, b) => a.price - b.price);
