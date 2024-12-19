@@ -69,6 +69,7 @@ dates:Date[],
 flightDetail:flightCard[],
 filteredFlight:flightCard[],
 currentItems:()=>flightCard[],
+currentFlightTransit:flightCard[],
 next:()=>void,
 previous:()=> void,
 detail: flightCard | null
@@ -102,6 +103,7 @@ export const AppContext = createContext<AppContextType>({
    flightDetail:[],
    filteredFlight:[],
    currentItems:()=>[],
+   currentFlightTransit:[],
    next:()=>{},
    previous:()=> {},
    detail: null,
@@ -338,6 +340,7 @@ setInput((input)=>({...input, [name]:value}))
          setIsAuthenticated:setIsAuthenticated,
          setInput:setInput,
          login:login,
-         register:register
+         register:register,
+         currentFlightTransit:currentFlightTransit
    }}>{props.children}</AppContext.Provider> 
 }
