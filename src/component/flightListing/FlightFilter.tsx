@@ -22,16 +22,16 @@ const FlightFilter = () => {
         </select>
     </div>
     <div className='flex items-center space-x-2 w-full md:space-x-5 justify-between relative'>
-        <input type="text" name="start" id="" value={input.start} onChange={handleInputs} className="border-2 border-neutral-400 rounded-2xl p-1 text-sm font-normal w-1/3" placeholder='Houston (HOU)                         ' />
-        <input type="text" name="end" id="" value={input.end} onChange={handleInputs} className="border-2 border-neutral-400 rounded-2xl p-1 text-sm font-normal w-1/3" placeholder='Los Angeles (LAX)                  ' />
+        <input type="text" name="start" id="" value={input.start} onChange={handleInputs} className="border-2 border-blue-900 rounded-md p-1 text-sm font-normal w-1/3" placeholder='Houston (HOU)                         ' />
+        <input type="text" name="end" id="" value={input.end} onChange={handleInputs} className="border-2 border-blue-900 rounded-md p-1 text-sm font-normal w-1/3" placeholder='Los Angeles (LAX)                  ' />
       
    
     <div className="flex flex-col space-y-4 w-1/3 md:relative">
-      <div className="flex items-center space-x-2 border-2 border-neutral-400 rounded-2xl p-1 text-sm font-normal">
+      <div className="flex items-center space-x-2 border-2 border-blue-900 rounded-md p-1 text-sm font-normal">
        
         <FaCalendarAlt 
           onClick={toggleInputs} 
-          className="cursor-pointer text-gray-500 text-xl"
+          className="cursor-pointer text-blue-900 text-xl"
         />
 
       
@@ -68,7 +68,7 @@ const FlightFilter = () => {
         
       )}
        </div>
-       <div className="bg-primary-600 rounded-3xl p-2">
+       <div className="bg-blue-900 rounded-3xl p-2">
        <FaSearch className='text-white' onClick={()=>searchCity()} />
     </div>
     </div>

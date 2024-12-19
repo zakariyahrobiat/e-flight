@@ -4,10 +4,10 @@ const FlightCard = () => {
  const {dates, currentItems,previous, next, handleFlightDetail}= useAuth()
   return (
 <div className="mt-5">
-  <div className="flex justify-between items-center bg-primary-600 md:px-2">
+  <div className="flex justify-between items-center bg-primary-700 md:px-2">
   {dates.map((item, index)=>{
     return(
-      <div key={index} className="text-white p-2 active:bg-white active:text-primary-600 active:rounded-t-md text-sm font-medium mt-2"><button > {item.toDateString()}</button></div>
+      <div key={index} className="text-white p-2 active:bg-white active:text-primary-700 active:rounded-t-md text-sm font-medium mt-2"><button > {item.toDateString()}</button></div>
     )
    
 })}
@@ -26,7 +26,7 @@ const FlightCard = () => {
 <div className="w-2/5"><p>{arrival}-{departure}</p> <p>{duration}</p></div>
 <p className="w-1/5">{stops}</p>
 <p className="w-1/5 hidden md:block">{price}USD</p>
-<button className="w-1/5 hidden md:block bg-primary-600 p-1 rounded text-white" onClick={()=>handleFlightDetail(id)}>choose</button>
+<button className="w-1/5 hidden md:block bg-primary-700 px-4 py-2 font-semibold rounded text-white" onClick={()=>handleFlightDetail(id)}>choose</button>
 <div className="w-1/5 md:hidden">
 <p className="">{price}USD</p>
 <button className=" bg-primary-600 p-1 rounded text-white" onClick={()=>handleFlightDetail(id)}>choose</button> 
