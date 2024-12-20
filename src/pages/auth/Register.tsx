@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom"
 
 
 const Register = () => {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null)
-  const {input, setIsAuthenticated, setInput, register}= useAuth()
+ 
+  const {input, setIsAuthenticated, setInput, register, token, setError, error}= useAuth()
     const {email, password }= input
 const handleGoogleRegistration = async () => {
   setIsLoading(true);
@@ -22,7 +22,7 @@ const handleGoogleRegistration = async () => {
     const user = await googleUser();
     if (user) {
       setIsAuthenticated(true);
-      Navigate("/flights");
+      navigate("/flights");
     }
   } catch (err) {
     console.error("Google registration failed:", err);
@@ -46,8 +46,12 @@ const handleGoogleRegistration = async () => {
   setError(null)
 
 try{
+  // if (token){
+  //   setError("User already registered. Please log in.")
+  //   return
+  // }
  await register(email, password)
- Navigate("/flights")
+ navigate("/flights")
  setInput({...input, email:"", password:""})
 
   }
@@ -56,7 +60,7 @@ try{
     setError("Registration failed. Please try again.");
   }
   finally {
-    setIsLoading(false); // Reset loading state
+    setIsLoading(false); 
   }
 }
   return (
@@ -65,7 +69,7 @@ try{
 
 
 <div className="mt-24 mx-5 md:w-1/2 md:mx-auto bg-neutral-150 shadow-3xl rounded p-5">
-{error && <div className="bg-red-600 text-white p-2 absolute top-16 z-20 w-1/3 left-1/2 transform -translate-x-1/2 text-lg font-semibold rounded-lg">{error}</div>}
+{error && <div className="bg-red-600 text-white p-2 absolute top-16 z-20 w-2/3 md:w-1/3 left-1/2 transform -translate-x-1/2 text-lg font-semibold rounded-lg">{error}</div>}
 <form onSubmit={handleRegister}>
 <InputContent heading="Sign up" button={isLoading ? "Signing up..." : "Sign up"} option="Register with your Google Account" onClick={handleGoogleRegistration} discription="Already have an account?" link="/login" text="Sign in here"/>
 </form>

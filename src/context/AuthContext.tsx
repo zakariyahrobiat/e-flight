@@ -96,7 +96,9 @@ isAscendingChecked:boolean,
   isAuthenticated: boolean,
   setIsAuthenticated:(isAuthenticated:boolean)=>void
   login:(email: string, password: string)=>void,
-  register:(email: string, password: string)=>void
+  register:(email: string, password: string)=>void,
+  error:string | null,
+  setError:(error:string|null)=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -130,7 +132,9 @@ export const AppContext = createContext<AppContextType>({
     isAuthenticated:false,
      setIsAuthenticated:()=>{},
      login:()=>{},
-     register:()=>{}
+     register:()=>{},
+     error:null,
+     setError:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -150,6 +154,7 @@ const [filteredFlightsBase, setfilteredFlightsBase] = useState<flightCard[]>([])
 const [currentFlightTransit, setCurrentTransit] = useState<flightCard[]>([])
 const [token, setToken] = useState<string | null>(localStorage.getItem("token"))
 const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token)
+const [error, setError] = useState<string | null>(null)
 const setAuthStatus=(token:string)=>{
   localStorage.setItem("token",token)
   setToken(token)
@@ -341,6 +346,8 @@ setInput((input)=>({...input, [name]:value}))
          setInput:setInput,
          login:login,
          register:register,
-         currentFlightTransit:currentFlightTransit
+         currentFlightTransit:currentFlightTransit,
+         error:error,
+         setError:setError
    }}>{props.children}</AppContext.Provider> 
 }
