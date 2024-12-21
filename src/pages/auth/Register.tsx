@@ -13,7 +13,7 @@ const Register = () => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false);
  
-  const {input, setIsAuthenticated, setInput, register, token, setError, error}= useAuth()
+  const {input, setIsAuthenticated, setInput, register, setError, error}= useAuth()
     const {email, password }= input
 const handleGoogleRegistration = async () => {
   setIsLoading(true);
