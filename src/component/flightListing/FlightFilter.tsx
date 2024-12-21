@@ -9,7 +9,7 @@ const FlightFilter = () => {
   const toggleInputs = () => setShowInputs(!showInputs);
   return (
     <div className="w-full">
-    <div className=" flex justify-start items-center space-x-3 pb-2 ">
+    <div className=" flex justify-start items-center gap-3 pb-2  ">
         <select name="tripType" id="" value={input.tripType} onChange={handleInputs} className="bg-transparent border-2 border-blue-900 rounded-md text-sm font-normal p-1 w-1/5">
             <option value="one-way">One way</option>
             <option value="two-ways">two ways</option>

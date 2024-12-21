@@ -12,26 +12,32 @@ const FlightCard = () => {
    
 })}
   </div>
-<div>
+<div className="mt-5 md:mt-0">
   {currentItems().map((item)=>{
     const {id, name, arrival, departure, duration, price, stops, weight} = item
     return(
      <div className="" key={id}>
-      <div  className="flex py-2 w-full justify-between items-center">
+      <div className="md:hidden mx-5 mb-3 p-5 shadow-3xl rounded-xl">
+        <div className="flex justify-between items-center">
+      <p className="text-lg font-semibold">{name}</p>
+      <p className="text-lg font-semibold">{price}USD</p> 
+      </div>
+      <div className="flex justify-between items-center"><p>{arrival}-{departure}</p> <p className="text-lg font-semibold">{duration}</p></div>
+      <div className="flex justify-between items-center">
+      <p className="text-lg font-semibold">{stops}</p>
+      <button className="bg-primary-700 px-4 py-2 font-semibold rounded text-white" onClick={()=>handleFlightDetail(id)}>choose</button>
+      </div>
+      </div>
+      <div  className="hidden md:flex py-2 w-full justify-between items-center">
 <div className="w-2/5">
-<p >{name}</p>
-<p>{weight}kg</p>
+<p className="text-lg font-semibold">{name}</p>
+<p className="font-semibold">{weight}kg</p>
 </div>
 
-<div className="w-2/5"><p>{arrival}-{departure}</p> <p>{duration}</p></div>
-<p className="w-1/5">{stops}</p>
-<p className="w-1/5 hidden md:block">{price}USD</p>
+<div className="w-2/5"><p className="text-lg font-semibold">{arrival}-{departure}</p> <p>{duration}</p></div>
+<p className="w-1/5 text-lg font-semibold">{stops}</p>
+<p className="w-1/5 text-lg font-semibold">{price}USD</p>
 <button className="w-1/5 hidden md:block bg-primary-700 px-4 py-2 font-semibold rounded text-white" onClick={()=>handleFlightDetail(id)}>choose</button>
-<div className="w-1/5 md:hidden">
-<p className="">{price}USD</p>
-<button className=" bg-primary-600 p-1 rounded text-white" onClick={()=>handleFlightDetail(id)}>choose</button> 
-</div>
-
       </div>
       <hr className="w-full"/>
       </div>
@@ -41,9 +47,9 @@ const FlightCard = () => {
 
 </div>
 
-<div className="flex justify-end items-center space-x-3">
-<FaLessThan className ="bg-primary-500 p-1 text-xl text-white" onClick={previous}/>
-<FaGreaterThan className="bg-primary-500 p-1 text-xl text-white" onClick={next}/>
+<div className="flex justify-center items-center space-x-3">
+<FaLessThan className ="bg-primary-700 p-1 text-xl text-white" onClick={previous}/>
+<FaGreaterThan className="bg-primary-700 p-1 text-xl text-white" onClick={next}/>
 </div>
 </div>
 
