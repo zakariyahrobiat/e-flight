@@ -20,23 +20,23 @@ const FlightDetail = () => {
   return (
     <div >
        {detail && show && (
-        <div className="absolute bg-white top-16 right-0 h-screen text-left">
+        <div className="fixed bg-white top-16 md:top-20 right-0 h-screen text-left w-full md:w-1/3">
         <div className="flex justify-between items-center w-full px-3 py-1">
         <p className="text-sm font-semibold">{detail.name}</p>
        <FaTimes onClick={()=>setShow(false)} className="text-sm font-thin"/>
        </div>
-       <div className="flex space-x-5 items-center text-sm font-normal px-3 pb-1">
+       <div className="flex gap-5 items-center text-sm font-normal px-3 pb-1">
         <button onClick={()=>setSelectedTab("flightDetails")}>Flight details</button>
         <button onClick={()=>setSelectedTab("benefit")}>Benefits</button>
         <button onClick={()=>setSelectedTab("refund")}>Refund</button>
         <button onClick={()=>setSelectedTab("reschedule")}>Reschedule</button>
        </div>
-       <div className="h-3/4">
+       <div className="h-[70%]">
        {tabContent[selectedTab]}
        </div>
-       <div className="flex justify-between items-center mt-1 px-3">
-        <p className="text-xl font-semibold text-tertiary2-750">${detail.price}</p>
-       <Link to="/booking"><button className="bg-primary-500 text-sm font-normal text-white py-1 px-2 rounded-2xl">Book now</button></Link>
+       <div className="flex justify-between items-center px-3">
+        <p className="text-3xl font-bold text-primary-700">${detail.price}</p>
+       <Link to="/booking"><button className="bg-primary-700 text-white py-1 px-3 md:py-2 md:px-5 font-bold rounded-lg">Book now</button></Link>
        </div>
        </div>
        )}

@@ -10,22 +10,22 @@ export const Flight = ({startLocation, endLocation, arrivalport, departureport}:
     const {travelClass, number} =input
 
   return (
-    <div className="h-[42%] bg-neutral-100 px-3 py-0">
-        <div className="flex justify-start h-full items-start space-x-3"> 
+    <div className="h-[42%] bg-blue-50 pl-3 py-0 w-full">
+        <div className="flex justify-start h-full items-start gap-1"> 
             <div className="flex flex-col justify-between h-full">
-                <p className="font-medium text-base text-secondary-500">{detail?.departure}</p>
+                <p className="font-medium text-base text-primary-700">{detail?.departure}</p>
                 <p className="text-sm font-normal text-neutral-900">{detail?.duration}"</p>
-                <p className="font-medium text-base text-secondary-500">{detail?.arrival}</p>
+                <p className="font-medium text-base text-primary-700">{detail?.arrival}</p>
             </div>
             <div className="border h-full border-secondary-500"></div>
             <div>
             <p className="text-base font-medium text-neutral-900">{startLocation}</p>
         <p className="text-sm font-normal text-neutral-600">{departureport}</p>
-        <div className="flex items-center space-x-3 text-sm font-normal text-primary-600 pt-2 pb-1">
+        <div className="flex items-center gap-3 text-sm font-normal text-blue-900 pt-2 pb-0">
         <p>{detail?.flightNumber}</p>
         <p>{travelClass}</p>
         </div>
-        <div className="flex space-x-3">
+        <div className="flex gap-2 justify-between items-center w-full">
             <div>
             <p className="text-sm text-primary-600 font-normal">Baggage <span className="text-neutral-700">{number} x 25kg</span></p>
             <p className="text-sm text-primary-600 font-normal">Cabin Baggage <span className="text-neutral-700">1 x 7 kg</span></p>
@@ -58,7 +58,7 @@ export  default function Details() {
             endLocation={end} />
   {tripType === "two-ways" && (
     <div className="h-full">
-        <div className="flex justify-between items-center bg-neutral-200 py-1 px-5 rounded-2xl my-2">
+        <div className="flex justify-between items-center bg-blue-50 py-1 px-5 rounded-2xl my-2">
             <p className="text-sm font-normal text-neutral-900">Stop to change planes {detail?.arrivalCity}</p>
             <p className="text-sm font-medium text-neutral-900">{detail?.arrival}</p>
       

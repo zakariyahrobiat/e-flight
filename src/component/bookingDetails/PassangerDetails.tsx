@@ -1,12 +1,27 @@
+import { FormEvent } from "react";
 import { useAuth } from "../../hooks/useAuth"
 import BookingInput from "../input/BookingInput";
 const PassangerDetails = () => {
-    const {setBookingTab, updateProgress, country, input, handleInputs} = useAuth()
+    const {setBookingTab, updateProgress, country, input, handleInputs, error, setError} = useAuth()
     const {name, surname, title, email, phoneNumber}= input
+   
+    const next =(e:FormEvent)=>{
+e.preventDefault()
+if(!email || !surname || !phoneNumber || !title || !name){
+  setError("All fields are required. Please fill in the missing details.");
+  return
+}
+
+setBookingTab("flightPurchase")
+updateProgress()
+    }
+     setTimeout(next,100)
   return (
     <div className="pt-3 pb-20">
-      <p className="font-semibold text-xl text-secondary-500">Passenger details</p>
-      <p className="text-sm font-normal text-neutral-600">Name as on ID card/passport without title and punctuation</p>
+      {error && <div className="bg-red-600 text-white p-2 fixed top-16 z-20 w-2/3 md:w-1/3 left-1/2 transform -translate-x-1/2 text-lg font-semibold rounded-lg">{error}</div>}
+     
+      <p className="font-bold text-xl text-blue-900">Passenger details</p>
+      <p className="text-sm font-normal text-blue-900">Name as on ID card/passport without title and punctuation</p>
       <form action="">
         <div className="grid grid-cols-2  gap-3 md:gap-5">
         <BookingInput variant="input" name="name" value={name} onChange={handleInputs} label="Name" placeholder="Input text"/>
@@ -19,9 +34,9 @@ const PassangerDetails = () => {
         </div>
      
       <div className="pt-3">
-      <p className="font-semibold text-xl text-secondary-500 pb-3">Identity</p>
-      <div className="bg-secondary-100 p-2">
-      <p className="font-semibold text-sm text-secondary-500">Passport valid for at least 6 months from departure date is required for international travel or transit abroad
+      <p className="font-bold text-xl text-blue-900 pb-3">Identity</p>
+      <div className="bg-blue-50 p-2">
+      <p className="font-semibold text-sm text-primary-700">Passport valid for at least 6 months from departure date is required for international travel or transit abroad
 
 Make sure that the passenger's name is exactly as written in the government issued ID/Passport/Driving License. 
 Avoid any mistake, because some airlines don't allow name corrections after booking.</p>
@@ -36,7 +51,7 @@ Avoid any mistake, because some airlines don't allow name corrections after book
         </div>
      
       <div className="pt-3">
-      <p className="font-semibold text-xl text-secondary-500">Contact details</p>
+      <p className="font-bold text-xl text-blue-900">Contact details</p>
    
       <div className="grid grid-cols-2 gap-3 md:gap-5">
         <BookingInput variant="input" name="name" value={name} onChange={handleInputs} label="Name" placeholder="Input text"/>
@@ -49,7 +64,7 @@ Avoid any mistake, because some airlines don't allow name corrections after book
         </div>
       
       </div>
-      <button className="bg-primary-500 text-white font-normal text-base w-full mt-10 py-1" onClick={()=>{setBookingTab("flightPurchase");updateProgress()} }>Submit</button>
+      <button className="bg-blue-900 text-white font-bold text-base w-full mt-10 py-1" onClick={next}>Submit</button>
       </form>
        
     </div>

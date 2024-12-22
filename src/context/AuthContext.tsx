@@ -181,6 +181,15 @@ const register = async (email: string, password: string) => {
     console.error("Registration failed", error);
   }
 };
+useEffect(() => {
+  if (error) {
+    const timer = setTimeout(() => {
+      setError(""); // Clear error
+    }, 3000); // 5000ms = 5 seconds
+
+    return () => clearTimeout(timer); // Cleanup timeout
+  }
+}, [error, setError]);
 
 
 useEffect(() => {

@@ -4,7 +4,7 @@ import visa from "../../assets/visa.svg"
 import verve from "../../assets/verve.svg"
 import BookingInput from "../input/BookingInput"
 import { useAuth } from "../../hooks/useAuth"
-
+import PayWithPaystack from "../../payStack"
 
 const FlightPurchase = () => {
   const {setBookingTab, updateProgress, country} = useAuth()
@@ -12,7 +12,7 @@ const FlightPurchase = () => {
   
   return (
     <div>
-       <p className="font-semibold text-xl text-secondary-500">Passenger details</p>
+       <p className="font-semibold text-xl text-blue-900">Passenger details</p>
        <div className="flex w-full py-3 gap-5 md:gap-10 justify-between items-center">
        <div className="flex w-1/2 bg-primary-100 border border-primary-500 rounded py-2 px-1 md:px-5 gap-2 md:gap-5 items-center">
         <input type="radio" name="" id="payment-method" />
@@ -59,6 +59,7 @@ const FlightPurchase = () => {
           <p className="text-xs font-normal text-neutral-900">By selecting the button below, I agree to the Property Rules, Terms and Conditions, and Privacy Policy </p>
         </div>
         <button className="bg-primary-500 text-white font-normal text-base w-full mt-10 py-1" onClick={()=>{setBookingTab("flightTicket");updateProgress()} }>Submit</button>
+        {/* <button><PayWithPaystack/></button> */}
         </form>
         
     </div>
