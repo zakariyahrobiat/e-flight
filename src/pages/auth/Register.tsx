@@ -1,4 +1,4 @@
-import {useState} from "react"
+
 import BackgroundLayout from "../../Layout/BackgroundLayout"
 import NavBar from "../../component/NavBar"
 import Footer from "../../component/Footer"
@@ -6,14 +6,14 @@ import InputContent from "../../component/input/InputContent"
 import { googleUser } from "../../component/authService/Auth"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
-
+import { registerUser } from "../../component/authService/Auth"
 
 
 const Register = () => {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false);
+  
  
-  const {input, setIsAuthenticated, setInput, register, setError, error}= useAuth()
+  const {input, setIsAuthenticated,setError, error, setIsLoading, isLoading}= useAuth()
     const {email, password }= input
 const handleGoogleRegistration = async () => {
   setIsLoading(true);
@@ -31,34 +31,48 @@ const handleGoogleRegistration = async () => {
     setIsLoading(false); // Reset loading state
   }
 };
-  const handleRegister =async(e:React.FormEvent)=>{
-    e.preventDefault()
-    if (!email || !password) {
-      console.error("Email or password is missing");
-      setError("Email and password are required.");
-      return;
-  }
-  if (password.length < 6) {
-    setError("Password must be at least 6 characters long.");
-    return;
-  }
-  setIsLoading(true);
-  setError(null)
+const handleRegister = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError(null);
 
-try{
- await register(email, password)
- navigate("/flights")
- setInput({...input, email:"", password:""})
+  try {
+    await registerUser(email, password);
+    setError("User registered successfully!");
+    navigate("/flights")
+  } catch (error: any) {
+    setError(error.message || "Registration failed.");
+  }
+};
+//   const handleRegister =async(e:React.FormEvent)=>{
+//     e.preventDefault()
+//     if (!email || !password) {
+//       console.error("Email or password is missing");
+//       setError("Email and password are required.");
+//       return;
+//   }
+//   if (password.length < 6) {
+//     setError("Password must be at least 6 characters long.");
+//     return;
+//   }
+//   const normalizedEmail = email.trim().toLowerCase();
+//   setIsLoading(true);
+//   setError(null)
 
-  }
-  catch(error){
-    console.error(error)
-    setError("Registration failed. Please try again.");
-  }
-  finally {
-    setIsLoading(false); 
-  }
-}
+// try{
+//  await register(normalizedEmail, password)
+ 
+//  setInput({...input, email:"", password:""})
+//  navigate("/flights")
+
+//   }
+//   catch(error:any){
+//     console.error("Error during registration:", error.message)
+//     setError(error.message || "Registration failed. Please try again.");
+//   }
+//   finally {
+//     setIsLoading(false); 
+//   }
+// }
   return (
     <BackgroundLayout>
 <NavBar/>

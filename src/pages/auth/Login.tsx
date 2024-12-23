@@ -2,24 +2,15 @@ import Footer from "../../component/Footer"
 import NavBar from "../../component/NavBar"
 import BackgroundLayout from "../../Layout/BackgroundLayout"
 import InputContent from "../../component/input/InputContent"
-
+import { loginUser } from "../../component/authService/Auth"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
 import { googleUser } from "../../component/authService/Auth"
 const Login = () => {
   const navigate = useNavigate()
-  const {input, login, error, setError, setAuthStatus}= useAuth()
+  const {input, error, setError, setAuthStatus}= useAuth()
     const {email,password} = input
-    const checkIfUserExists = async (email: string) => {
-      try {
-        const response = await fetch(`/api/check-user/${email}`); // Your API endpoint to check if user exists
-        const data = await response.json();
-        return data.exists; // Assuming your API returns { exists: true/false }
-      } catch (error) {
-        console.error("Error checking user", error);
-        return false;
-      }
-    };
+
     const handleGoogleLogin = async () => {
       try {
         const response = await googleUser();
@@ -37,27 +28,20 @@ const Login = () => {
         setError("Google login failed. Please try again.");
       }
     };
-const handleLogin = async(e:React.FormEvent)=>{
-  e.preventDefault()
-  if(!email || !password){
-    setError("Email or password is missing");
-    return;
-  }
-  try{
-    const userExists = await checkIfUserExists(email); // Make an API call to check if the user is registered
-    if (!userExists) {
-      setError("User not registered. Please sign up.");
-      return;
-    }
-await login(email, password)
-navigate("/flights")
-  } catch(error){
-    console.error("Login failed", error)
-    setError("Login failed. Please check your credentials.")
-  }
    
-
-}
+    const handleLogin = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setError(null);
+  
+      try {
+        const token = await loginUser(email, password);
+        console.log("User logged in with token:", token);
+        navigate("/flights")
+        setError("Login successful!");
+      } catch (error: any) {
+        setError(error.message || "Login failed.");
+      }
+    };
   
   return (
     <BackgroundLayout>

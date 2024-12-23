@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect} from "react";
 import { PropsWithChildren } from "react";
-import { registerUser, loginUser } from "../component/authService/Auth";
+
 
    const data = [
       { id: 1, name: "Naija Skies Airways", flightNumber: "NS123", departure: "10:00AM", arrival: "12:30PM", duration: "2 hr 30 min", stops: "direct", price: 150.00, weight: 25, departureCity: "Lagos", departureAirport: "Murtala Muhammed International Airport", arrivalCity: "Abuja", arrivalAirport: "Nnamdi Azikiwe International Airport", transit: null, stopInfo: "direct" },
@@ -46,6 +46,9 @@ import { registerUser, loginUser } from "../component/authService/Auth";
     startDate:string,
     endDate:string,
     password:string,
+    cardNumber: string,
+    expiration:string,
+    cvv:string
   }
    export interface flightCard{
       id: number; 
@@ -95,10 +98,11 @@ isAscendingChecked:boolean,
   setAuthStatus:(token:string)=>void
   isAuthenticated: boolean,
   setIsAuthenticated:(isAuthenticated:boolean)=>void
-  login:(email: string, password: string)=>void,
-  register:(email: string, password: string)=>void,
+ 
   error:string | null,
-  setError:(error:string|null)=>void
+  setError:(error:string|null)=>void,
+  isLoading:boolean,
+  setIsLoading:(isLoading:boolean)=>void
 }
 export const AppContext = createContext<AppContextType>({
    dates:[],
@@ -112,7 +116,7 @@ export const AppContext = createContext<AppContextType>({
    handleFlightDetail:()=>{},
    show:false,
    setShow:()=>{},
-    input:{start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"",startDate:"", endDate:"", password:""}, 
+    input:{start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"",startDate:"", endDate:"", password:"", cardNumber:"", cvv:"", expiration:""}, 
     setInput:()=>{},
    handleInputs:()=>{},
    progress:0,
@@ -131,10 +135,11 @@ export const AppContext = createContext<AppContextType>({
     setAuthStatus:()=>{},
     isAuthenticated:false,
      setIsAuthenticated:()=>{},
-     login:()=>{},
-     register:()=>{},
+ 
      error:null,
-     setError:()=>{}
+     setError:()=>{},
+     isLoading:false,
+     setIsLoading:()=>{}
 })
 export const Context =(props:PropsWithChildren)=>{
    const [dates, setDate] = useState <Date[]>([])
@@ -142,7 +147,7 @@ export const Context =(props:PropsWithChildren)=>{
   const [currentPage, setCurrentPage]= useState(0)
   const [detail, setDetail]= useState<flightCard | null>(null)
   const [show, setShow] = useState(false)
-  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"", startDate:"", endDate:"", password:""})
+  const [input, setInput]= useState<inputFields>({start:"", end:"",tripType:"" ,travelClass:"", number:0, name:"", surname:"", title:"", email:"", phoneNumber:"", startDate:"", endDate:"", password:"", cvv:"", cardNumber:"",expiration:""})
   const [progress, setProgress]= useState(0)
   const [bookingTab, setBookingTab] = useState<"passangerDetail" | "flightPurchase" | "flightTicket">("passangerDetail");
   const [country, setCountry] = useState<Country[]>([])
@@ -155,32 +160,12 @@ const [currentFlightTransit, setCurrentTransit] = useState<flightCard[]>([])
 const [token, setToken] = useState<string | null>(localStorage.getItem("token"))
 const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token)
 const [error, setError] = useState<string | null>(null)
+const [isLoading, setIsLoading] = useState(false);
 const setAuthStatus=(token:string)=>{
   localStorage.setItem("token",token)
   setToken(token)
   setIsAuthenticated(true) 
 }
-const login = async (email: string, password: string) => {
-  try {
-    const token = await loginUser({ email, password });
-    if (token) {
-      setAuthStatus(token);
-    }
-  } catch (error) {
-    console.error("Login failed", error);
-  }
-};
-
-// Handle register
-const register = async (email: string, password: string) => {
-  try {
-    await registerUser({ email, password });
-    // Optionally log the user in automatically after registration
-    await login(email, password);
-  } catch (error) {
-    console.error("Registration failed", error);
-  }
-};
 useEffect(() => {
   if (error) {
     const timer = setTimeout(() => {
@@ -353,10 +338,11 @@ setInput((input)=>({...input, [name]:value}))
          isAuthenticated:isAuthenticated,
          setIsAuthenticated:setIsAuthenticated,
          setInput:setInput,
-         login:login,
-         register:register,
+        
          currentFlightTransit:currentFlightTransit,
          error:error,
-         setError:setError
+         setError:setError,
+         isLoading:isLoading,
+         setIsLoading:setIsLoading
    }}>{props.children}</AppContext.Provider> 
 }

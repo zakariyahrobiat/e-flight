@@ -15,7 +15,7 @@ if(!email || !surname || !phoneNumber || !title || !name){
 setBookingTab("flightPurchase")
 updateProgress()
     }
-     setTimeout(next,100)
+    //  setTimeout(next,100)
   return (
     <div className="pt-3 pb-20">
       {error && <div className="bg-red-600 text-white p-2 fixed top-16 z-20 w-2/3 md:w-1/3 left-1/2 transform -translate-x-1/2 text-lg font-semibold rounded-lg">{error}</div>}
