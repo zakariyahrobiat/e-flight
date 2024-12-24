@@ -7,14 +7,25 @@ import { useAuth } from "../../hooks/useAuth"
 import PayWithPaystack from "../../payStack"
 import { useState } from "react"
 const FlightPurchase = () => {
-  const { country, input, handleInputs} = useAuth()
-  const {email, cardNumber, cvv, expiration} = input
-  const [paymentMethod, setPaymentMethod] = useState("paystack");
+  const { country, input, handleInputs, detail} = useAuth()
+  const {email, cardNumber, cvv, expiration, phoneNumber, surname} = input
+  const [paymentMethod, setPaymentMethod] = useState<string>("paystack");
   const handlePaymentMethodChange = (method:string) => {
     setPaymentMethod(method);
   };
+  const publicKey ="pk_test_edd0a3b47a1b2ed9e43f84fbcaad730a531dfb22";
+  const amount = detail?.price
+  const phone = phoneNumber
+  const name = surname
+  const handleSuccess = (reference: string) => {
+    alert(`Payment successful! Reference: ${reference}`);
+    // Handle success logic here (e.g., save to the database)
+  };
 
-  
+  const handleClose = () => {
+    alert("Transaction closed. Please try again.");
+  };
+
   return (
     <div>
        <p className="font-semibold text-xl text-blue-900">Passenger details</p>
@@ -34,7 +45,9 @@ const FlightPurchase = () => {
         </label>
        </div>
        </div>
-       <form>
+       <form onSubmit={(e) => {
+    e.preventDefault(); // Prevents the default form submission behavior
+  }}>
         <div className="grid grid-cols-2 gap-5">
         <BookingInput variant="input" name="email" value={email} onChange={handleInputs} label="Name on card" placeholder="Enter name on card"/>
         <BookingInput variant="input" label="Card number" name="cardNumber" value={cardNumber} onChange={handleInputs} placeholder="Enter card number"/>
@@ -64,7 +77,17 @@ const FlightPurchase = () => {
           <p className="text-xs font-normal text-neutral-900">By selecting the button below, I agree to the Property Rules, Terms and Conditions, and Privacy Policy </p>
         </div>
         {/* <button className="bg-primary-500 text-white font-normal text-base w-full mt-10 py-1" onClick={()=>{setBookingTab("flightTicket");updateProgress()} }>Submit</button> */}
-        {paymentMethod === "card" && <PayWithPaystack />}
+        {/* {paymentMethod === "card" && <PayWithPaystack email={email} amount={amount || 0} publicKey={publicKey} onSuccess={handleSuccess} name={name} phone={phone}
+        onClose={handleClose} />} */}
+        <PayWithPaystack
+  email={email}
+  amount={5000} // 5000 Kobo = 50 Naira
+  publicKey={publicKey}
+  onSuccess={handleSuccess}
+  name={name}
+  phone={phone}
+  onClose={handleClose}
+/>
         </form>
         
     </div>
