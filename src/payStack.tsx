@@ -7,14 +7,15 @@ interface PaystackProps {
   phone:string,
   amount: number; // Amount in kobo (e.g., 10000 = 100 Naira)
   publicKey: string;
-  onSuccess: (reference: string) => void;
+  onSuccess: () => void;
   onClose: () => void;
+ 
 }
 const PayWithPaystack = ({email, amount,name, phone, publicKey, onSuccess, onClose}: PaystackProps) => {
   const componentProps = {
     email,
     amount,
-    metadata: {
+      metadata: {
       custom_fields: [
         {
           display_name: "Name",
@@ -30,15 +31,15 @@ const PayWithPaystack = ({email, amount,name, phone, publicKey, onSuccess, onClo
     },
     publicKey,
     text: "Pay Now",
-    onSuccess: (reference: any) => {
-      onSuccess(reference.reference); // Pass the reference to the parent function
+    onSuccess: () => {
+      onSuccess(); // Pass the reference to the parent function
     },
     onClose: () => {
       onClose(); // Call the parent function when the modal is closed
     },
   };
   return(
-    <PaystackButton className="bg-green-500 text-white px-4 py-2 rounded" {...componentProps}/>
+    <PaystackButton className="bg-primary-500 text-white font-normal text-base w-full mt-10 py-1" {...componentProps}/>
   )
 }
 export default PayWithPaystack;
