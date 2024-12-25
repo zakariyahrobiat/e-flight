@@ -10,15 +10,19 @@ import image3 from "../../assets/image.png"
 import image4 from "../../assets/image1.png"
 import image5 from "../../assets/image2.png"
 import { FaArrowRight } from "react-icons/fa6"
+import jet from "../../assets/jet.png"
 const LandingPage = () => {
   return (
     <BackgroundLayout>
         <NavBar/>
-       <div className="hero-bg h-96 mt-16 md:mt-20 flex justify-between items-center gap-10">
-        <div className="w-full text-center md:w-1/2 md:text-left px-5 md:px-10">
+       <div className="hero-bg h-96 mt-16 md:mt-20 md:grid grid-cols-2 justify-between items-center gap-10">
+        <div className="w-full text-center md:text-left px-5 md:px-10">
         <h1 className="text-4xl md:text-6xl font-bold text-blue-900">Book Your Flight Ticket in Just a Few Clicks</h1>
         <p className="text-xl py-5 text-blue-900 font-medium">We make booking your flight simple and fast, offering a wide range of options tailored to your preferences. Find the perfect flight with ease and efficiency.</p>
         <Link to="/register"><button className="bg-primary-700 py-3 text-white font-bold text-xl px-5 rounded-xl">Explore Now</button></Link>
+        </div>
+        <div className="hidden md:block">
+<img src={jet} alt="" srcSet="" />
         </div>
        </div>
        <div className="bg-neutral-150 p-5 md:p-10">
@@ -28,7 +32,7 @@ const LandingPage = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
           <div className="bg-white shadow-3xl rounded-b-xl" >
-            <img src={image4} alt="" srcSet="" />
+            <img src={image4} alt="" srcSet="" className="w-full bg-contain" />
             <div className="flex justify-between items-start p-2">
               <span>
                 <p className="text-lg font-semibold">Tarkwa Bay Beach</p>
@@ -38,7 +42,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="bg-white shadow-3xl rounded-b-xl">
-            <img src={image3} alt="" srcSet="" />
+            <img src={image3} alt="" srcSet="" className="w-full bg-contain" />
             <div className="flex justify-between items-start px-2">
               <span><p className="text-lg font-semibold">Millennium Park</p>
               <p className="text-sm">Serene park for picnics and leisure walks.</p>
@@ -47,7 +51,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="bg-white shadow-3xl rounded-b-xl">
-            <img src={image5} alt="" srcSet="" />
+            <img src={image5} alt="" srcSet="" className="w-full bg-contain" />
             <div className="flex justify-between items-start px-2">
               <span>
                 <p className="text-lg font-semibold">Obudu Mountain Resort</p>

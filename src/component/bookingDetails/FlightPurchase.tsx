@@ -5,6 +5,7 @@ import verve from "../../assets/verve.svg"
 import BookingInput from "../input/BookingInput"
 import { useAuth } from "../../hooks/useAuth"
 import PayWithPaystack from "../../payStack"
+import PayWithPayPal from "../../Paypal"
 import { useState } from "react"
 const FlightPurchase = () => {
   const { country, input, handleInputs, detail, setBookingTab, updateProgress, error, setError} = useAuth()
@@ -80,7 +81,7 @@ const FlightPurchase = () => {
         </div>
         
         {paymentMethod === "card" && <PayWithPaystack email={email} amount={amount || 0} publicKey={publicKey} onSuccess={handleSuccess} name={name} phone={phone}  onClose={handleClose} />}
-      
+      {paymentMethod === "paypal" && <PayWithPayPal/>}
         </form>
         
     </div>
