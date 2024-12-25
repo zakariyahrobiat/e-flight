@@ -37,7 +37,7 @@ const Login = () => {
         const token = await loginUser(email, password);
         console.log("User logged in with token:", token);
         navigate("/flights")
-        setError("Login successful!");
+        // setError("Login successful!");
       } catch (error: any) {
         setError(error.message || "Login failed.");
       }
