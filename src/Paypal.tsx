@@ -16,7 +16,7 @@ currency: "USD", // Choose the currency
            label:"paypal"
     }
     const createOrder = async (data: any, actions: any) => {
-        // Create the order directly through PayPal
+        console.log("Data from createOrder:", data);
         try{
         const order = await actions.order.create({
           purchase_units: [
@@ -37,6 +37,7 @@ currency: "USD", // Choose the currency
       }
     };
       const onApprove = async (data:any, actions: any) => {
+        console.log("Data from onApprove:", data);
        try{
         const details = await actions.order.capture();
         console.log("Payment successful:", details);
