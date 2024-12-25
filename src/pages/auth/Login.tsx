@@ -12,6 +12,7 @@ const Login = () => {
     const {email,password} = input
 
     const handleGoogleLogin = async () => {
+      
       try {
         const response = await googleUser();
         if (response){
@@ -23,21 +24,24 @@ const Login = () => {
           setError("Google login failed. Please try again.");
         }
      
-      } catch (error) {
-        console.error("Google login failed", error);
+      } catch (error: any) {
         setError("Google login failed. Please try again.");
       }
     };
-   
     const handleLogin = async (e: React.FormEvent) => {
       e.preventDefault();
       setError(null);
-  
+      if (!email || !password) {
+        setError("Please enter both email and password.");
+        return;
+      }
+    
       try {
         const token = await loginUser(email, password);
         console.log("User logged in with token:", token);
+        setAuthStatus(token);
         navigate("/flights")
-        // setError("Login successful!");
+        setError("Login successful!");
       } catch (error: any) {
         setError(error.message || "Login failed.");
       }

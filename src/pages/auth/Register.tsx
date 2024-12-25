@@ -34,7 +34,10 @@ const handleGoogleRegistration = async () => {
 const handleRegister = async (e: React.FormEvent) => {
   e.preventDefault();
   setError(null);
-
+  if (!email || !password) {
+    setError("Please enter both email and password.");
+    return;
+  }
   try {
     await registerUser(email, password);
     setError("User registered successfully!");
