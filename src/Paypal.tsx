@@ -1,9 +1,9 @@
 import { PayPalButtons, PayPalButtonsComponentProps, PayPalScriptProvider, ReactPayPalScriptOptions } from '@paypal/react-paypal-js';
 import { useAuth } from './hooks/useAuth';
-import { useState } from 'react';
+// import { useState } from 'react';
 export default function PayWithPayPal() {
     const {detail, setBookingTab, updateProgress}= useAuth()
-    const [orderId, setOrderId] = useState<string | null>(null);
+    // const [orderId, setOrderId] = useState<string | null>(null);
     const initialOptions: ReactPayPalScriptOptions = {
         clientId: "AZz282s7q3SJE-XWARWfMQgi1lUMsfEm-xo-ECLtLK0UCk5vKvuVSi_yCQ7cNFYqoH3XAVfvu8JSxY4f",
 currency: "USD", // Choose the currency
@@ -29,7 +29,7 @@ currency: "USD", // Choose the currency
           ],
         });
         console.log("Order created with ID:", order);
-        setOrderId(order); // Save the order ID for further reference
+        // setOrderId(order); // Save the order ID for further reference
         return order; // Return the order ID to proceed with approval
       }
       catch (error) {
