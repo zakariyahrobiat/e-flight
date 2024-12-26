@@ -38,6 +38,10 @@ const handleRegister = async (e: React.FormEvent) => {
     setError("Please enter both email and password.");
     return;
   }
+  if (password.length < 6){
+    setError("password should not be less than 6")
+    return;
+  }
   try {
     await registerUser(email, password);
     setError("User registered successfully!");
