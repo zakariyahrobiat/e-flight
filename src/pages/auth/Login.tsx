@@ -1,5 +1,5 @@
 import Footer from "../../component/Footer"
-import NavBar from "../../component/NavBar"
+import NavBar from "../../component/nav/NavBar"
 import BackgroundLayout from "../../Layout/BackgroundLayout"
 import InputContent from "../../component/input/InputContent"
 import { loginUser } from "../../component/authService/Auth"

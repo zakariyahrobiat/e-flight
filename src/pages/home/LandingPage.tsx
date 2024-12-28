@@ -1,4 +1,4 @@
-import NavBar from "../../component/NavBar"
+import NavBar from "../../component/nav/NavBar"
 import BackgroundLayout from "../../Layout/BackgroundLayout"
 // import hero from "../../assets/hero.png"
 import Footer from "../../component/Footer"

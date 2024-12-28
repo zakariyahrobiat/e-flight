@@ -1,6 +1,6 @@
 
 import BackgroundLayout from "../../Layout/BackgroundLayout"
-import NavBar from "../../component/NavBar"
+import NavBar from "../../component/nav/NavBar"
 import Footer from "../../component/Footer"
 import InputContent from "../../component/input/InputContent"
 import { googleUser } from "../../component/authService/Auth"
