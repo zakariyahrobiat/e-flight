@@ -14,3 +14,16 @@ describe("",()=>{
        expect (paragraph).toHaveTextContent(/flight/i)
     })
 })
+
+describe("",()=>{
+    it("",()=>{
+        render(
+            <BrowserRouter>
+            <NavBar/>
+            </BrowserRouter>
+        )
+        const button = screen.getByRole("button")
+        expect (button). toBeInTheDocument()
+        expect (button).toHaveTextContent(/started/i)
+    })
+})
