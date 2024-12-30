@@ -4,6 +4,7 @@ import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import LandingPage from '../pages/home/LandingPage';
 import FlightsPage from '../pages/flights/FlightsPage';
 
+
 describe("AppRoutes", () => {
     it("renders the LandingPage for '/' route", () => {
         // Use createMemoryRouter for testing with a specific route
@@ -14,7 +15,7 @@ describe("AppRoutes", () => {
             { initialEntries: ["/"] } // Start at '/'
         );
 
-        render(<RouterProvider router={testRouter} />);
+        render( <RouterProvider router={testRouter}/>);
 
         // Replace with actual text from your LandingPage
         expect(screen.getByText(/design/i)).toBeInTheDocument();
